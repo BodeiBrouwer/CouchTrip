@@ -1,0 +1,22 @@
+<h2>Where do you want to travel?</h2>
+
+<form action="POST" method="/new-country">
+  <input name="new-country" type="text">
+
+  <div>
+    <input type="radio" id="all-media" name="media-selection" value="all" checked>
+    <label for="all-media">Show me everything</label>
+  </div>
+
+  <div>
+    <input type="radio" id="books" name="media-selection" value="books">
+    <label for="books">Books only</label>
+  </div>
+
+  <div>
+    <input type="radio" id="films" name="media-selection" value="films">
+    <label for="films">Films only</label>
+  </div>
+
+  <button type="submit">Take me there</button>
+</form>
