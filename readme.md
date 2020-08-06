@@ -5,7 +5,7 @@
 Provide suggestions for films and books from any country so users can travel even when they can't.
 <br>
 
-##User Stories
+## User Stories
 - **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault.
 - **500** - As a user I want to see a nice error page when the super team screws it up so that I know that is not my fault
 - **login-signup** - As a user I want to see a page that lets me easily sign in as an existing user. 
@@ -19,7 +19,7 @@ Provide suggestions for films and books from any country so users can travel eve
 ## Routes (back-end)
 
 - GET / 
-  - renders index.hbs with sign in form
+  - renders index.hbs with general info and sign in form
 - GET /auth/signup
   - redirects to / if user logged in
   - renders signup.hbs
@@ -34,8 +34,8 @@ Provide suggestions for films and books from any country so users can travel eve
   - body:
     - email
     - password
-- POST /auth/logout
-  - body: (empty)
+- GET /auth/logout
+  - redirects to /
 
 ### Protected routes
 - GET /new-country
@@ -53,6 +53,9 @@ Provide suggestions for films and books from any country so users can travel eve
   - renders /:country/visited with checked off mark, edits /maps
 - GET /map
   - renders country-overview.hbs
+
+- GET leaflet
+- POst to leaflet
   
 - GET /profile
   - renders user-profile.hbs
@@ -73,8 +76,8 @@ Provide suggestions for films and books from any country so users can travel eve
      	email: String, required: true, unique: true,
       password: String, minlength: 6, maxlength: 12, required: true,
      	username: String, required: true, maxlength: 20
-      countriesVisited: Array,
-      countriesToDo: Array,
+      countriesVisited: Array of country IDs,
+      countriesToDo: Array of country IDs,
 		})
           
   - Country 
@@ -91,7 +94,7 @@ Provide suggestions for films and books from any country so users can travel eve
 			_id: ,
 			title: String,
       description: String,
-      country: String,
+      country: ID,
       rating: Number,
       picture: String,
     })
@@ -102,7 +105,7 @@ Provide suggestions for films and books from any country so users can travel eve
       title: String,
       author: String,
       description: String,
-      country: String,
+      country: ID,
       rating: Number,
       picture: String,
     })
