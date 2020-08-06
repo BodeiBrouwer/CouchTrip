@@ -16,3 +16,10 @@ const bookSchema = new Schema({
 });
 
  module.exports = model('Book', bookSchema);
+
+ //missing countries:
+ //Belize: 1
+ //Angola: 1
+ //Benin: 1
+ // Burkina Faso: 1
+ //chad: 1
