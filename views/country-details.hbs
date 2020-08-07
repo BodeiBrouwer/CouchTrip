@@ -1,0 +1,59 @@
+
+
+<h2>{{country.name}}</h2>
+
+<div id="country-media-collection">
+
+  <div class="book-info">
+    <h3>{{country.books[0].title}}</h3>
+    <img src="<p>{{country.books[0].picture}}" alt="{{country}}">
+    <p>by {{country.books[0].author}}</p>
+    <p>{{country.books[0].description}}</p>
+    <p>Rating on Goodreads:{{country.books[0].rating}}</p>
+  </div>
+
+  <div class="book-info">
+    <h3>{{country.books[1].title}}</h3>
+    <img src="<p>{{country.books[1].picture}}" alt="{{country}}">
+    <p>by {{country.books[1].author}}</p>
+    <p>{{country.books[1].description}}</p>
+    <p>Rating on Goodreads:{{country.books[1].rating}}</p>
+  </div>
+
+  <div class="film-info">
+    <h3>{{country.films[0].title}}</h3>
+    <img src="<p>{{country.films[0].picture}}" alt="{{country}}">
+    <p>{{country.films[0].description}}</p>
+    <p>Rating on IMDB:{{country.films[0].rating}}</p>
+  </div>
+
+  <div class="film-info">
+    <h3>{{country.films[1].title}}</h3>
+    <img src="<p>{{country.films[1].picture}}" alt="{{country}}">
+    <p>{{country.films[1].description}}</p>
+    <p>Rating on IMDB:{{country.films[1].rating}}</p>
+  </div>
+
+</div>
+
+<!--
+If country is part of user's collection
+-->
+  <div>
+    <p>Check off the country once you've explored it through books and films to mark it as visited on your map.</p>
+    <input type="checkbox" id="visited" name="visited">
+    <label for="visited">I've been here</label>
+  </div>
+
+<!--
+Show only one button based on whether country is part of user's collection
+-->
+  <form action="POST" method="{{country}}/delete">
+    <label>Delete country from my map</label>
+    <button type="submit">Delete</button>
+  </form>
+
+  <form action="POST" method="{{country}}/add">
+    <label>Add country to my map</label>
+    <button type="submit">Add</button>
+  </form>
