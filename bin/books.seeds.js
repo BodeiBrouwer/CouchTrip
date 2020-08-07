@@ -1,6 +1,8 @@
+require('dotenv').config();
 require('../configs/db.config')
 const mongoose = require('mongoose');
 const BooksModel = require('../models/Books.model');
+const axios = require('axios');
 const app = require('../app');
 
 let books = [
@@ -1406,23 +1408,45 @@ let books = [
   }
 ]
 
-books.forEach(book => {
-  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
-  .then((result) => {
-    book.description = result.data.description;
-    book.img = result.data.imageLinks.thumbnail;
-    book.rating = result.data.averageRating;
-  })
+let newBooks = [
+  {title: "A Thousand Splendid Suns",
+  author: "Khaled Hosseini",
+  country: "Afghanistan"
+  }
+]
+
+newBooks.forEach((book, i) => {
+  let myTimeout = []
+  myTimeout[i]= setTimeout(() => {
+
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
+    .then((result) => {
+      let bookObj = {
+      description: result.data.items.volumeInfo.description,
+      img: result.data.items.volumeInfo.imageLinks ? result.data.items.volumeInfo.imageLinks.thumbnail: '',
+      rating: result.data.items.volumeInfo.averageRating
+    }
+      BooksModel.findOneAndUpdate({title: book.title}, {$set: bookObj})
+        .then(() => {
+          console.log('data updated')
+        })
+    })
+    .catch((err) => {
+      console.log('error', err)
+    })
+    clearTimeout(myTimeout[i])
+  }, 2000)
 })
 
-BooksModel.create(books)
-  .then(() => {
-    console.log('Books are inserted')
-        mongoose.connection.close()
-            .then(() => {
-                console.log('Connection is closed')
-            })
-  })
-  .catch((err) => {
-    console.log('wow, that did not go well', err)
-});
+
+// BooksModel.create(books)
+//   .then(() => {
+//     console.log('Books are inserted')
+//         mongoose.connection.close()
+//             .then(() => {
+//                 console.log('Connection is closed')
+//             })
+//   })
+//   .catch((err) => {
+//     console.log('wow, that did not go well', err)
+// });
