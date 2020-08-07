@@ -1405,3 +1405,24 @@ let books = [
   country: "Zimbabwe"
   }
 ]
+
+books.forEach(book => {
+  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
+  .then((result) => {
+    book.description = result.data.description;
+    book.img = result.data.imageLinks.thumbnail;
+    book.rating = result.data.averageRating;
+  })
+})
+
+BooksModel.create(books)
+  .then(() => {
+    console.log('Books are inserted')
+        mongoose.connection.close()
+            .then(() => {
+                console.log('Connection is closed')
+            })
+  })
+  .catch((err) => {
+    console.log('wow, that did not go well', err)
+});
