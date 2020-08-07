@@ -54,5 +54,7 @@ app.locals.title = 'CouchTrip';
 const index = require('./routes/index');
 app.use('/', index);
 
+const userRoutes = require('./routes/user.routes');
+app.use('/', userRoutes);
 
 module.exports = app;
