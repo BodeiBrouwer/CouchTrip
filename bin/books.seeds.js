@@ -258,6 +258,10 @@ let books = [
   author: "Joseph Brahim Seid",
   country: "Chad"
   },
+  {title: "",
+  author: "",
+  country: "Chad" 
+  },
   {title: "The Savage Detectives",
   author: "Roberto Bolano",
   country: "Chile"

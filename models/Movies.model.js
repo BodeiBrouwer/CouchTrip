@@ -7,8 +7,9 @@ const movieSchema = new Schema({
   },
   country: String,
   description: String,
-  rating: Number,
-  img: String
+  rating: String,
+  img: String,
+  imdb: String
 });
 
  module.exports = model('Movie', movieSchema);
