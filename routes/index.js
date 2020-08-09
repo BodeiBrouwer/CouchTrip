@@ -1,11 +1,13 @@
 const express = require('express');
 const router  = express.Router();
 
+const UserModel = require('../models/User.model')
+
 let signedIn = true;
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.render('country-details');
+  res.render('index');
 });
 
 module.exports = router;
