@@ -8,4 +8,8 @@ router.get('/map', (req, res, next) => {
   res.render('./country-overview.hbs')
 });
 
+router.get('/map', (req, res, next) => {
+  res.render('./country-overview.hbs')
+});
+
 module.exports = router;
