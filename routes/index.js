@@ -4,11 +4,13 @@ const bcryptjs = require('bcryptjs');
 
 const UserModel = require('../models/User.model')
 
+const UserModel = require('../models/User.model')
+
 let signedIn = true;
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.render('country-details');
+  res.render('index');
 });
 
 router.get('/signup', (req, res, next) => {
