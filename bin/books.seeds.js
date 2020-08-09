@@ -1412,37 +1412,6 @@ let books = [
   }
 ]
 
-let newBooks = [
-  {title: "A Thousand Splendid Suns",
-  author: "Khaled Hosseini",
-  country: "Afghanistan"
-  }
-]
-
-newBooks.forEach((book, i) => {
-  let myTimeout = []
-  myTimeout[i]= setTimeout(() => {
-
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
-    .then((result) => {
-      let bookObj = {
-      description: result.data.items.volumeInfo.description,
-      img: result.data.items.volumeInfo.imageLinks ? result.data.items.volumeInfo.imageLinks.thumbnail: '',
-      rating: result.data.items.volumeInfo.averageRating
-    }
-      BooksModel.findOneAndUpdate({title: book.title}, {$set: bookObj})
-        .then(() => {
-          console.log('data updated')
-        })
-    })
-    .catch((err) => {
-      console.log('error', err)
-    })
-    clearTimeout(myTimeout[i])
-  }, 2000)
-})
-
-
 // BooksModel.create(books)
 //   .then(() => {
 //     console.log('Books are inserted')
@@ -1454,3 +1423,80 @@ newBooks.forEach((book, i) => {
 //   .catch((err) => {
 //     console.log('wow, that did not go well', err)
 // });
+
+// books.forEach((book, i) => {
+//   let myTimeout = []
+//   myTimeout[i]= setInterval(() => {
+//   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
+//   .then((result) => {
+//     book.description = result.data.items.volumeInfo.description;
+//     if (result.data.items.volumeInfo.imageLinks.thumbnail = undefined) {
+//       book.img = 'shorturl.at/lFX69'
+//     }
+//     else {
+//       book.img = result.data.items.volumeInfo.imageLinks.thumbnail;
+//     }
+//     if (result.data.items.volumeInfo.averageRating === undefined) {
+//       book.rating = 'No rating'
+//     }
+//     else {
+//       book.rating = result.data.items.volumeInfo.averageRating;
+//     }
+//     })
+//     .then(() => {
+//       BooksModel.create(book)
+//       console.log('Book inserted!')
+//     })
+//     .catch((err) => {
+//       console.log('Could not insert book', err)
+//     })
+//     .catch((err) => {
+//       console.log('Could not create book', err)
+//     })
+//   clearInterval(myTimeout[i])
+//   }, 5000)
+// })
+
+
+
+// books.forEach((book, i) => {
+//   let myTimeout = []
+//   myTimeout[i]= setInterval(() => {
+
+//     axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
+//     .then((result) => {
+//       let bookObj = {
+//       description: result.data.items.volumeInfo.description,
+//       img: result.data.items.volumeInfo.imageLinks ? result.data.items.volumeInfo.imageLinks.thumbnail: '',
+//       rating: result.data.items.volumeInfo.averageRating
+//     }
+//       BooksModel.findOneAndUpdate({title: book.title}, {$set: bookObj})
+//         .then(() => {
+//           console.log('data updated')
+//         })
+//     })
+//     .catch((err) => {
+//       console.log('error', err)
+//     })
+//     clearInterval(myTimeout[i])
+//   }, 2000)
+// })
+
+
+// const CountryModel = require('../models/Country.model')
+
+// let countries = [];
+// let book1;
+// let book2;
+
+// books.forEach(book => {
+//   if (books.indexOf(book)%2 === 0) {
+//     book1 = book.title;
+//   }
+//   else {
+//     book2 = book.title
+//     countries.push({name: book.country, book: [book1, book2]});
+//   }
+// })
+
+// CountryModel.create(countries);

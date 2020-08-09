@@ -9,12 +9,6 @@ const axios = require('axios');
 const MovieModel = require('../models/Movies.model')
 
 
-
-
-
-
-
-
 let movies = [
   {title: 'Osama',
   country: 'Afghanistan',
@@ -1797,37 +1791,34 @@ let movies = [
 ]
 
 
-movies.forEach(movie => {
-  axios.get(`http://www.omdbapi.com/?i=${movie.imdb}&apikey=${process.env.OMDBKEY}`)
-  .then((result) => {
-    movie.description = result.data.Plot;
-    if (result.data.Poster = 'N/A') {
-      movie.img = 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80'
-    }
-    else {
-      movie.img = result.data.Poster;
-    }
-    if (result.data.Ratings[0] === undefined) {
-      movie.rating = 'No rating'
-    }
-    else {
-      movie.rating = result.data.Ratings[0].Value;
-    }
-    MovieModel.create(movie);
-    })
-  .then(() => {
-    console.log('inserted!')
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-    .catch((err) => {
-      console.log(err)
-    })
-  })
-
-
-
+// movies.forEach((movie) => {
+//   axios.get(`http://www.omdbapi.com/?i=${movie.imdb}&apikey=${process.env.OMDBKEY}`)
+//   .then((result) => {
+//     movie.description = result.data.Plot;
+//     if (result.data.Poster = 'N/A') {
+//       movie.img = 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80'
+//     }
+//     else {
+//       movie.img = result.data.Poster;
+//     }
+//     if (result.data.Ratings[0] === undefined) {
+//       movie.rating = 'No rating'
+//     }
+//     else {
+//       movie.rating = result.data.Ratings[0].Value;
+//     }
+//     MovieModel.create(movie)
+//     })
+//     .then(() => {
+//       console.log('inserted!')
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+//   })
 
 
 const CountryModel = require('../models/Country.model')
