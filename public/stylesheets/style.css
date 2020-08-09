@@ -16,7 +16,7 @@ a {
 
 h1 {
   font-family: 'Molle', cursive;
-  font-size: 4rem;
+  font-size: 3.8rem;
   color: pink;
   margin: 0;
 }
@@ -60,5 +60,16 @@ h3 {
   margin: 10px auto;
   padding: 2.5px;
 }
+
+.btn:focus {
+  outline: none;
+}
+
+.intro {
+  width: 300px;
+  margin: auto;
+}
+
+
 
 /*# sourceMappingURL=style.css.map */
