@@ -1,41 +1,36 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: url('https://images.unsplash.com/photo-1577951645595-b301174d680c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80');
+  background: url("https://images.unsplash.com/photo-1577951645595-b301174d680c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80");
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
   text-align: center;
-  color: white;
-}
+  color: white; }
 
 a {
-  color: pink;
-}
+  color: pink; }
 
 h1 {
   font-family: 'Molle', cursive;
+  font-size: 4rem;
   font-size: 3.8rem;
   color: pink;
-  margin: 0;
-}
+  margin: 0; }
 
 h2 {
   font-size: 1.5rem;
   color: pink;
-  margin: 0;
-}
+  margin: 0; }
 
 h3 {
   font-size: 1.2rem;
-  color: pink;
-}
+  color: pink; }
 
 .form {
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: column; }
 
 .login-form > input {
   border: none;
@@ -43,13 +38,11 @@ h3 {
   background: transparent;
   color: pink;
   width: 200px;
-  margin: auto;
-}
+  margin: auto; }
 
 .login-form > input:focus {
   outline: none;
-  background: transparent;
-}
+  background: transparent; }
 
 .btn {
   background: pink;
@@ -58,18 +51,15 @@ h3 {
   color: white;
   width: 100px;
   margin: 10px auto;
-  padding: 2.5px;
-}
+  padding: 2.5px; }
 
 .btn:focus {
-  outline: none;
-}
+  outline: none; }
 
 .intro {
   width: 300px;
-  margin: auto;
-}
+  margin: auto; }
 
-
+/*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=style.css.map */

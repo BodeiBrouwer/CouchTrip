@@ -1,8 +1,69 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url('https://images.unsplash.com/photo-1577951645595-b301174d680c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80');
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: white;
+}
+a {
+  color: pink;
 }
 
-a {
-  color: #00B7FF;
+h1 {
+  font-family: 'Molle', cursive;
+  font-size: 4rem;
+  font-size: 3.8rem;
+  color: pink;
+  margin: 0;
 }
+h2 {
+  font-size: 1.5rem;
+  color: pink;
+  margin: 0;
+}
+h3 {
+  font-size: 1.2rem;
+  color: pink;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.login-form > input {
+  border: none;
+  border-bottom: 2px solid pink;
+  background: transparent;
+  color: pink;
+  width: 200px;
+  margin: auto;
+}
+.login-form > input:focus {
+  outline: none;
+  background: transparent;
+}
+.btn {
+  background: pink;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 100px;
+  margin: 10px auto;
+  padding: 2.5px;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.intro {
+  width: 300px;
+  margin: auto;
+}
+
+
+
+/*# sourceMappingURL=style.css.map */ 
