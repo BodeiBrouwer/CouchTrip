@@ -4,13 +4,11 @@ const bcryptjs = require('bcryptjs');
 
 const UserModel = require('../models/User.model')
 
-const UserModel = require('../models/User.model')
-
 let signedIn = true;
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.render('index');
+  res.render('index.hbs');
 });
 
 router.get('/signup', (req, res, next) => {
@@ -22,8 +20,7 @@ router.get('/signin', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
-  const {username, email, passwordHash} = req.body
-  console.log(req.body)
+  const {username, email, password} = req.body
 
   if(!username || !email || !password){
       res.status(500).render('auth/signup.hbs', {errorMessage: 'Please enter all details'})
@@ -49,13 +46,13 @@ router.post('/signup', (req, res) => {
               // create that user in the db
               UserModel.create({username, email, passwordHash: hashPass })
                 .then(() => {
-                    res.redirect('/profile')
+                    res.render('/profile')
                 })
           })
     })
 })
 
-router.post('/signin', (req, res) => {
+router.post('/', (req, res) => {
   const { email, password} = req.body
   console.log(req.body)
 
@@ -94,9 +91,11 @@ router.post('/signin', (req, res) => {
     })
 })
 
-router.get('/profile', (req, res) => {
-  res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
-})
-
+router.get("/logout", (req, res, next) => {
+  req.session.destroy((err) => {
+    // cannot access session here
+    res.redirect("/");
+  });
+});
 
 module.exports = router;
