@@ -16,15 +16,15 @@
 </head>
 <body>
 
-{{#if signedIn}}
+{{#if loggedInUser}}
     <nav id="navbar">
-      <img id="nav-logo" src="" alt="couch-trip-logo">
-      <ul>
+      <h5>Couch<br>Trip</h5>
+      <ul class="nav-list">
         <li><a href="/profile">Profile</a></li>
         <li><a href="/map">Map</a></li>
         <li><a href="/new-country">New Trip</a></li>
       </ul>
-      <button><a href="/logout">Log out</a></button>
+      <button class="logout-btn"><a href="/logout">Log out</a></button>
     </nav>
 {{/if}}
 

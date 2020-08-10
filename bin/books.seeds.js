@@ -1424,58 +1424,21 @@ let books = [
 //     console.log('wow, that did not go well', err)
 // });
 
-// books.forEach((b, i) => {
-//   let myTimeout = []
-//   myTimeout[i]= setTimeout((book) => {
-//     console.log(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(book.title)}+inauthor:${encodeURI(book.author)}&key=${process.env.GOOGLE_API_KEY}`)
-//   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(book.title)}+inauthor:${encodeURI(book.author)}&key=${process.env.GOOGLE_API_KEY}`)
-//   .then((result) => {
-//     bookInfo = result.data.items[0]
-//       book.description = bookInfo.volumeInfo.description;
-//       if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined) {
-//         book.img = 'shorturl.at/lFX69'
-//       }
-//       else {
-//         book.img = bookInfo.volumeInfo.imageLinks.thumbnail;
-//       }
-//       if (bookInfo.volumeInfo.averageRating === undefined) {
-//         book.rating = 0
-//       }
-//       else {
-//         book.rating = bookInfo.volumeInfo.averageRating;
-        
-//       }
-//       //console.log(book)
-//       BooksModel.create(book)
-//           .then(() => console.log('Book inserted!'))
-//           .catch((err) => {
-//             console.log('Could not insert book')
-//           })
-    
-    
-//     }) 
-//     .catch((err) => {
-//       console.log('Could not create book', err)
-//     })
-//   clearTimeout(myTimeout[i])
-//   }, 2000, b)
-// })
+
+const CountryModel = require('../models/Country.model')
 
 
-// const CountryModel = require('../models/Country.model')
+books.forEach(book => {
+  let book1;
+  let book2;
+  if (books.indexOf(book)%2 === 0) {
+    book1 = book.title;
+  }
+  else {
+    book2 = book.title
+    CountryModel.findOneAndUpdate({name: book.country}, {$set: {book: [book1, book2]}});
+  }
+})
 
-// let countries = [];
-// let book1;
-// let book2;
 
-// books.forEach(book => {
-//   if (books.indexOf(book)%2 === 0) {
-//     book1 = book.title;
-//   }
-//   else {
-//     book2 = book.title
-//     countries.push({name: book.country, book: [book1, book2]});
-//   }
-// })
-
-// CountryModel.create(countries);
+// this is a change

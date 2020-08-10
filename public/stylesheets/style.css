@@ -23,15 +23,33 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat; }
 
+#new-country-screen {
+  margin-top: 150px; }
+
 #navbar {
   position: fixed;
   top: 0px;
   height: 100px;
+  width: 100vw;
   background: url("https://images.unsplash.com/photo-1577951645595-b301174d680c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80");
   background-position: center top;
   background-size: cover;
   background-attachment: fixed;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around; }
+
+.nav-list > li > a {
+  text-decoration: none;
+  margin: 30px;
+  padding: 0;
+  font-size: 1.2rem; }
 
 p {
   font-size: 0.9rem; }
@@ -54,6 +72,12 @@ h2 {
 h3 {
   font-size: 1.1rem;
   color: pink; }
+
+h5 {
+  font-family: 'Molle', cursive;
+  font-size: 1.2rem;
+  color: pink;
+  margin-left: 10px; }
 
 .form {
   display: flex;
@@ -85,6 +109,17 @@ h3 {
   width: 100px;
   margin: 10px auto;
   padding: 2.5px; }
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  margin-right: 10px; }
+
+.logout-btn > a {
+  text-decoration: none; }
 
 .btn:focus {
   outline: none; }
