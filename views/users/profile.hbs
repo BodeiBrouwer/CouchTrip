@@ -1,10 +1,14 @@
-<h2>Profile</h2>
+<div class="user-screen">
+
+<h3>Profile</h3>
 
 <div class="user-details">
-  <p>Name: {{user.name}}</p>
-  <p>Email: {{user.email}}</p>
+  <p>Name: {{loggedInUser.username}}</p>
+  <p>Email: {{loggedInUser.email}}</p>
   <p>Password: *******</p>
   <form action="/profile" method="POST">
-    <button type="submit">Edit</button>
+    <button class="btn profile-edit-btn" type="submit">Edit</button>
   </form>
+</div>
+
 </div>

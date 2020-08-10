@@ -4,6 +4,12 @@ body {
   color: white;
   margin: 0;
   font-size: 10px;
+  
+  background-image: linear-gradient( 45deg, pink, white );
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .start-screen { 
@@ -26,8 +32,13 @@ body {
   background-repeat: no-repeat;  
 }
 
-#new-country-screen {
-  margin-top: 150px;
+.user-screen {
+  margin-top: 200px;
+}
+
+.user-details {
+  color: #0c6785;
+  font-weight: lighter;
 }
 
 #navbar {
@@ -48,7 +59,8 @@ body {
 .nav-list {
   list-style-type: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  padding: 5px;
 }
 
 .nav-list > li > a{
@@ -57,6 +69,26 @@ body {
   padding: 0;
   font-size: 1.2rem;
 }
+
+.fas {
+  font-size: 1.3rem;
+  color: pink;
+  margin: 0;
+}
+
+.menu-span {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .menu-span {
+    display: inline-block;
+  }
+  .fas {
+    display: none;
+  }
+}
+
 
 p {
   font-size: 0.9rem;
@@ -80,6 +112,12 @@ h2 {
   margin: 0;
 }
 h3 {
+  font-family: 'Molle', cursive;
+  font-size: 1.5rem;
+  color: #0c6785;
+}
+
+h4 {
   font-size: 1.1rem;
   color: pink;
 }
@@ -129,15 +167,15 @@ h5 {
 .logout-btn {
   background: transparent;
   border: none;
-  border-radius: 5px;
-  width: 100px;
-  height: 30px;
   margin-right: 10px;
+  font-size: 1.1rem;
 }
 
 .logout-btn > a {
   text-decoration: none;
 }
+
+
 
 .btn:focus {
   outline: none;
@@ -153,6 +191,16 @@ h5 {
 
 .signup-form {
   margin-top: 40px;
+}
+
+.search-country-form {
+  margin-top: 20px;
+}
+
+.search-country-form > input {
+  color: #0c6785;
+  font-size: 1.2rem;
+  font-weight: normal;
 }
 
 .intro {
