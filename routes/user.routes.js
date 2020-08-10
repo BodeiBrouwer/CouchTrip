@@ -31,4 +31,8 @@ router.get('/profile', (req, res) => {
   }
 })
 
+router.post('/profile', (req, res) => {
+  res.render('users/edit-profile', {loggedInUser: req.session.loggedInUser})
+})
+
 module.exports = router;

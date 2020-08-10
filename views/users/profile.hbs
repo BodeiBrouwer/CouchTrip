@@ -3,9 +3,9 @@
 <h3>Profile</h3>
 
 <div class="user-details">
-  <p>Name: {{loggedInUser.username}}</p>
-  <p>Email: {{loggedInUser.email}}</p>
-  <p>Password: *******</p>
+  <p><span>Name:</span> {{loggedInUser.username}}</p>
+  <p><span>Email:</span> {{loggedInUser.email}}</p>
+  <p><span>Password:</span> *******</p>
   <form action="/profile" method="POST">
     <button class="btn profile-edit-btn" type="submit">Edit</button>
   </form>

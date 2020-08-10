@@ -22,6 +22,23 @@ body {
   background-repeat: no-repeat;
 }
 
+.signup-screen > h2 {
+  padding-top: 120px;
+  margin-bottom: 20px;
+  color: pink;
+}
+
+.signin-screen > h2 {
+  padding-top: 120px;
+  margin-bottom: 20px;
+  color: pink;
+}
+
+.signup-screen > p {
+  width: 60%;
+  margin: auto;
+}
+
 .error-screen {
   margin: 0;
   height: 100vh;
@@ -39,6 +56,10 @@ body {
 .user-details {
   color: #0c6785;
   font-weight: lighter;
+}
+
+.user-details > p > span {
+  color: pink;
 }
 
 #navbar {
@@ -113,7 +134,7 @@ h2 {
 }
 h3 {
   font-family: 'Molle', cursive;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #0c6785;
 }
 
@@ -162,6 +183,7 @@ h5 {
   width: 100px;
   margin: 10px auto;
   padding: 2.5px;
+  font-weight: bold;
 }
 
 .logout-btn {
@@ -175,7 +197,20 @@ h5 {
   text-decoration: none;
 }
 
+.search-country-btn {
+  background-color: #0c6785;
+  padding: 5px;
+}
 
+.profile-edit-btn {
+  background-color: #0c6785;
+  padding: 5px;
+}
+
+.edit-profile-btn {
+  background-color: #0c6785;
+  padding: 5px;
+}
 
 .btn:focus {
   outline: none;
@@ -201,6 +236,18 @@ h5 {
   color: #0c6785;
   font-size: 1.2rem;
   font-weight: normal;
+}
+
+.edit-user-form > label {
+  color: pink;
+}
+
+.edit-user-form > input {
+  color: #0c6785;
+}
+
+.edit-user-form > button {
+  background-color: #0c6785;
 }
 
 .intro {
