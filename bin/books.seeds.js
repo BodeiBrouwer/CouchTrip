@@ -1412,17 +1412,17 @@ let books = [
   }
 ]
 
-// BooksModel.create(books)
-//   .then(() => {
-//     console.log('Books are inserted')
-//         mongoose.connection.close()
-//             .then(() => {
-//                 console.log('Connection is closed')
-//             })
-//   })
-//   .catch((err) => {
-//     console.log('wow, that did not go well', err)
-// });
+BooksModel.create(books)
+  .then(() => {
+    console.log('Books are inserted')
+        mongoose.connection.close()
+            .then(() => {
+                console.log('Connection is closed')
+            })
+  })
+  .catch((err) => {
+    console.log('wow, that did not go well', err)
+});
 
 
 const CountryModel = require('../models/Country.model')
@@ -1433,9 +1433,16 @@ books.forEach(book => {
   let book2;
   if (books.indexOf(book)%2 === 0) {
     book1 = book.title;
+    CountryModel.updateOne({name: book.country}, {$push: {books: book1}})
+      .then(()=> {
+        console.log('update successful')
+      })
   }
   else {
-    book2 = book.title
-    CountryModel.findOneAndUpdate({name: book.country}, {$set: {book: [book1, book2]}});
+    book2 = book.title;
+    CountryModel.updateOne({name: book.country}, {$push: {books: book2}})
+    .then(()=> {
+      console.log('update book2 successful')
+    })
   }
 })
