@@ -46,7 +46,7 @@ router.post('/signup', (req, res) => {
               // create that user in the db
               UserModel.create({username: name, email, passwordHash: hashPass })
                 .then(() => {
-                    res.render('/profile')
+                    res.redirect('/profile')
                 })
           })
     })

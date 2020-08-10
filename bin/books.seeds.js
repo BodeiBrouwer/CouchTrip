@@ -1412,17 +1412,17 @@ let books = [
   }
 ]
 
-BooksModel.create(books)
-  .then(() => {
-    console.log('Books are inserted')
-        mongoose.connection.close()
-            .then(() => {
-                console.log('Connection is closed')
-            })
-  })
-  .catch((err) => {
-    console.log('wow, that did not go well', err)
-});
+// BooksModel.create(books)
+//   .then(() => {
+//     console.log('Books are inserted')
+//         mongoose.connection.close()
+//             .then(() => {
+//                 console.log('Connection is closed')
+//             })
+//   })
+//   .catch((err) => {
+//     console.log('wow, that did not go well', err)
+// });
 
 // books.forEach((b, i) => {
 //   let myTimeout = []
