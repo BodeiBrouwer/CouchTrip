@@ -1,8 +1,9 @@
 body {
-  font-family: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
   color: white;
   margin: 0;
+  font-size: 10px;
 }
 
 .start-screen {
@@ -38,31 +39,40 @@ body {
   background-repeat: no-repeat;  
 }
 
+p {
+  font-size: 0.8rem;
+}
+
 a {
   color: pink;
 }
 
 h1 {
   font-family: 'Molle', cursive;
-  font-size: 4rem;
   font-size: 3.8rem;
   color: pink;
   margin: 0;
   padding-top: 25px;
 }
+
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: pink;
   margin: 0;
 }
 h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: pink;
 }
 .form {
   display: flex;
   flex-direction: column;
 }
+
+.form > label {
+  font-size: 0.8rem;
+}
+
 .form > input {
   border: none;
   border-bottom: 2px solid pink;
@@ -106,8 +116,8 @@ h3 {
 
 #country-media-collection {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-
 }
 
 .media-info {
