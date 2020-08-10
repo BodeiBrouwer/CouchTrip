@@ -2,34 +2,16 @@
 
 <h3>Where do you want to travel?</h3>
 
-<form class="form search-country-form" action="/new-country" method="POST">
+<form class="form search-country-form" action="/{{this.name}}" method="POST">
 
   <input list="country-list" id="country-choice" name="country-choice">
 
   <datalist id="country-list">
-    <option value="Russia">
-    <option value="Germany">
-    <option value="Poland">
-    <option value="Nigeria">
-    <option value="Canada">
+
+      {{#each countries}}
+      <option value="{{this.name}}">{{this.name}}</option>
+      {{/each }}
   </datalist>
-
-  <!--
-  <div>
-    <input type="radio" id="all-media" name="media-selection" value="all" checked>
-    <label for="all-media">Show me everything</label>
-  </div>
-
-  <div>
-    <input type="radio" id="books" name="media-selection" value="books">
-    <label for="books">Books only</label>
-  </div>
-
-  <div>
-    <input type="radio" id="films" name="media-selection" value="films">
-    <label for="films">Films only</label>
-  </div>
-  -->
 
   <button class="btn search-country-btn" type="submit">Take me there</button>
 </form>
