@@ -6,8 +6,7 @@ body {
   font-size: 10px;
 }
 
-.start-screen {
-  padding: 50px;
+.start-screen { 
   margin: 0;
   height: 100vh;
   background: url('https://images.unsplash.com/photo-1577951645595-b301174d680c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80');
@@ -18,7 +17,6 @@ body {
 }
 
 .error-screen {
-  padding: 50px;
   margin: 0;
   height: 100vh;
   background: url('https://images.unsplash.com/photo-1533225737818-2a9101586b15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1778&q=80');
@@ -40,7 +38,7 @@ body {
 }
 
 p {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 a {
@@ -52,7 +50,7 @@ h1 {
   font-size: 3.8rem;
   color: pink;
   margin: 0;
-  padding-top: 25px;
+  padding-top: 50px;
 }
 
 h2 {
@@ -71,6 +69,7 @@ h3 {
 
 .form > label {
   font-size: 0.8rem;
+  margin: 5px auto;
 }
 
 .form > input {
@@ -87,6 +86,7 @@ h3 {
   outline: none;
   background: transparent;
 }
+
 .btn {
   background: pink;
   border: none;
@@ -101,6 +101,10 @@ h3 {
   outline: none;
 }
 
+.login-form {
+  margin-top: 20px;
+}
+
 .signin-form {
   margin-top: 40px;
 }
@@ -111,7 +115,7 @@ h3 {
 
 .intro {
   width: 300px;
-  margin: 25px auto;
+  margin: 30px auto;
 }
 
 #country-media-collection {

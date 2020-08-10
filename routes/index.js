@@ -44,9 +44,9 @@ router.post('/signup', (req, res) => {
         bcryptjs.hash(password , salt)
           .then((hashPass) => {
               // create that user in the db
-              UserModel.create({username : name, email, passwordHash: hashPass })
+              UserModel.create({username: name, email, passwordHash: hashPass })
                 .then(() => {
-                    res.render('/profile')
+                    res.redirect('/profile')
                 })
           })
     })
@@ -91,7 +91,46 @@ router.post('/', (req, res) => {
     })
 })
 
-router.get("/logout", (req, res, next) => {
+router.post('/signin', (req, res) => {
+  const { email, password} = req.body
+  console.log(req.body)
+
+  if( !email || !password){
+      res.status(500).render('auth/signin.hbs', {errorMessage: 'Please enter all details'})
+      return;
+  }
+
+  const emailReg = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
+  if (!emailReg.test(email)){
+    res.status(500).render('auth/signin.hbs', {errorMessage: 'Please enter valid email'})
+    return;
+  }
+
+  const passReg = new RegExp(/^(?=.*\d).{6,20}$/)
+  if (!passReg.test(password)){
+    res.status(500).render('auth/signin.hbs', {errorMessage: 'Password must be between 6 and 20 characters and must contain at least one number'})
+    return;
+  }
+
+  UserModel.findOne({email: email})
+    .then((userData) => {
+
+      let doesItMatch = bcryptjs.compareSync(password, userData.passwordHash); 
+      if (doesItMatch){
+        // loggedInUser = userData
+        req.session.loggedInUser = userData
+        res.redirect('/profile')
+      }
+      else {
+        res.status(500).render('auth/signin.hbs', {errorMessage: 'Passwords do not match'})
+      }
+    })
+    .catch((err) => {
+        console.log('Error ', err)
+    })
+})
+
+router.get('/logout', (req, res, next) => {
   req.session.destroy((err) => {
     // cannot access session here
     res.redirect("/");
