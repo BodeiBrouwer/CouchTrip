@@ -1439,6 +1439,3 @@ books.forEach(book => {
     CountryModel.findOneAndUpdate({name: book.country}, {$set: {book: [book1, book2]}});
   }
 })
-
-
-// this is a change

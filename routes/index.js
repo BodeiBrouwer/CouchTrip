@@ -27,6 +27,13 @@ router.post('/signup', (req, res) => {
       return;
   }
 
+  UserModel.findOne({email:email}).then(user=>{
+    if(user){
+        res.status(500).render('auth/signup.hbs', {errorMessage: 'Email address already in use'})
+        return;
+      }
+    })  
+
   const emailReg = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
   if (!emailReg.test(email)){
     res.status(500).render('auth/signup.hbs', {errorMessage: 'Please enter valid email'})
