@@ -2,13 +2,13 @@
 
 <h3>Where do you want to travel?</h3>
 
-<form class="form search-country-form" action="/{{this.name}}" method="POST">
+<form class="form search-country-form" action="/{{this.countries.name}}" method="POST">
 
   <input list="country-list" id="country-choice" name="country-choice">
 
   <datalist id="country-list">
 
-      {{#each countries}}
+      {{#each this.countries}}
       <option value="{{this.name}}">{{this.name}}</option>
       {{/each }}
   </datalist>

@@ -43,7 +43,7 @@ body {
   background-repeat: no-repeat; }
 
 .user-screen {
-  margin-top: 200px; }
+  margin-top: 150px; }
 
 .user-details {
   color: #0c6785;
@@ -224,6 +224,9 @@ h5 {
 
 .media-image {
   width: 200px; }
+
+.profile-pic {
+  width: 300px; }
 
 /*# sourceMappingURL=style.css.map */
 
