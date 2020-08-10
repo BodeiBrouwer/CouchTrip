@@ -14,6 +14,12 @@
     <option value="Canada">
   </datalist>
 
+  {{#each countries}}
+    
+    <p>Country: <a href="/{{this._id}}">{{this.name}}</a></p> 
+
+  {{/each }}
+
   <!--
   <div>
     <input type="radio" id="all-media" name="media-selection" value="all" checked>
