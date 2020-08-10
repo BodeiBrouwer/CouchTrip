@@ -1412,74 +1412,53 @@ let books = [
   }
 ]
 
-// BooksModel.create(books)
-//   .then(() => {
-//     console.log('Books are inserted')
-//         mongoose.connection.close()
-//             .then(() => {
-//                 console.log('Connection is closed')
-//             })
-//   })
-//   .catch((err) => {
-//     console.log('wow, that did not go well', err)
-// });
+BooksModel.create(books)
+  .then(() => {
+    console.log('Books are inserted')
+        mongoose.connection.close()
+            .then(() => {
+                console.log('Connection is closed')
+            })
+  })
+  .catch((err) => {
+    console.log('wow, that did not go well', err)
+});
 
-// books.forEach((book, i) => {
+// books.forEach((b, i) => {
 //   let myTimeout = []
-//   myTimeout[i]= setInterval(() => {
-//   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
+//   myTimeout[i]= setTimeout((book) => {
+//     console.log(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(book.title)}+inauthor:${encodeURI(book.author)}&key=${process.env.GOOGLE_API_KEY}`)
+//   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(book.title)}+inauthor:${encodeURI(book.author)}&key=${process.env.GOOGLE_API_KEY}`)
 //   .then((result) => {
-//     book.description = result.data.items.volumeInfo.description;
-//     if (result.data.items.volumeInfo.imageLinks.thumbnail = undefined) {
-//       book.img = 'shorturl.at/lFX69'
-//     }
-//     else {
-//       book.img = result.data.items.volumeInfo.imageLinks.thumbnail;
-//     }
-//     if (result.data.items.volumeInfo.averageRating === undefined) {
-//       book.rating = 'No rating'
-//     }
-//     else {
-//       book.rating = result.data.items.volumeInfo.averageRating;
-//     }
-//     })
-//     .then(() => {
+//     bookInfo = result.data.items[0]
+//       book.description = bookInfo.volumeInfo.description;
+//       if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined) {
+//         book.img = 'shorturl.at/lFX69'
+//       }
+//       else {
+//         book.img = bookInfo.volumeInfo.imageLinks.thumbnail;
+//       }
+//       if (bookInfo.volumeInfo.averageRating === undefined) {
+//         book.rating = 0
+//       }
+//       else {
+//         book.rating = bookInfo.volumeInfo.averageRating;
+        
+//       }
+//       //console.log(book)
 //       BooksModel.create(book)
-//       console.log('Book inserted!')
-//     })
-//     .catch((err) => {
-//       console.log('Could not insert book', err)
-//     })
+//           .then(() => console.log('Book inserted!'))
+//           .catch((err) => {
+//             console.log('Could not insert book')
+//           })
+    
+    
+//     }) 
 //     .catch((err) => {
 //       console.log('Could not create book', err)
 //     })
-//   clearInterval(myTimeout[i])
-//   }, 5000)
-// })
-
-
-
-// books.forEach((book, i) => {
-//   let myTimeout = []
-//   myTimeout[i]= setInterval(() => {
-
-//     axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
-//     .then((result) => {
-//       let bookObj = {
-//       description: result.data.items.volumeInfo.description,
-//       img: result.data.items.volumeInfo.imageLinks ? result.data.items.volumeInfo.imageLinks.thumbnail: '',
-//       rating: result.data.items.volumeInfo.averageRating
-//     }
-//       BooksModel.findOneAndUpdate({title: book.title}, {$set: bookObj})
-//         .then(() => {
-//           console.log('data updated')
-//         })
-//     })
-//     .catch((err) => {
-//       console.log('error', err)
-//     })
-//     clearInterval(myTimeout[i])
-//   }, 2000)
+//   clearTimeout(myTimeout[i])
+//   }, 2000, b)
 // })
 
 

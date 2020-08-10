@@ -24,7 +24,7 @@ router.get('/new-country', (req, res, next) => {
 
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
-    res.render('./users/profile.hbs', {loggedInUser: req.session.loggedInUser})
+    res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
   }
   else {
     res.redirect('/signin')

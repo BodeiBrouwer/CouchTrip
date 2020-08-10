@@ -20,9 +20,9 @@ router.get('/signin', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
-  const {username, email, password} = req.body
+  const {name, email, password} = req.body
 
-  if(!username || !email || !password){
+  if(!name || !email || !password){
       res.status(500).render('auth/signup.hbs', {errorMessage: 'Please enter all details'})
       return;
   }
@@ -44,7 +44,7 @@ router.post('/signup', (req, res) => {
         bcryptjs.hash(password , salt)
           .then((hashPass) => {
               // create that user in the db
-              UserModel.create({username, email, passwordHash: hashPass })
+              UserModel.create({username: name, email, passwordHash: hashPass })
                 .then(() => {
                     res.render('/profile')
                 })

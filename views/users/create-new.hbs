@@ -1,7 +1,16 @@
 <h2>Where do you want to travel?</h2>
 
 <form action="POST" method="/new-country">
-  <input name="new-country" type="text">
+
+  <input list="country-list" id="country-choice" name="country-choice">
+
+  <datalist id="country-list">
+    <option value="Russia">
+    <option value="Germany">
+    <option value="Poland">
+    <option value="Nigeria">
+    <option value="Canada">
+  </datalist>
 
   <div>
     <input type="radio" id="all-media" name="media-selection" value="all" checked>
