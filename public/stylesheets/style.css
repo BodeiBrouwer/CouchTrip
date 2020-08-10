@@ -1,13 +1,38 @@
 body {
+  font-family: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: white;
+  margin: 0; }
+
+.start-screen {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
   background: url("https://images.unsplash.com/photo-1577951645595-b301174d680c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80");
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
-  background-repeat: no-repeat;
-  text-align: center;
-  color: white; }
+  background-repeat: no-repeat; }
+
+.error-screen {
+  padding: 50px;
+  margin: 0;
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1533225737818-2a9101586b15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1778&q=80");
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat; }
+
+#navbar {
+  position: fixed;
+  top: 0px;
+  height: 100px;
+  background: url("https://images.unsplash.com/photo-1577951645595-b301174d680c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80");
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat; }
 
 a {
   color: pink; }
@@ -17,7 +42,8 @@ h1 {
   font-size: 4rem;
   font-size: 3.8rem;
   color: pink;
-  margin: 0; }
+  margin: 0;
+  padding-top: 25px; }
 
 h2 {
   font-size: 1.5rem;
@@ -61,9 +87,25 @@ h3 {
 .signin-form {
   margin-top: 40px; }
 
+.signup-form {
+  margin-top: 40px; }
+
 .intro {
   width: 300px;
   margin: 25px auto; }
+
+#country-media-collection {
+  display: flex;
+  flex-wrap: wrap; }
+
+.media-info {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 10px; }
+
+.media-image {
+  width: 200px; }
 
 /*# sourceMappingURL=style.css.map */
 
