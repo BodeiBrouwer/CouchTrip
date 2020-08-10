@@ -43,13 +43,8 @@ router.get('/:id', (req, res) => {
 })
 
 
-router.get('/profile', (req, res) => {
-  if (req.session.loggedInUser){
-    res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
-  }
-  else {
-    res.redirect('/signin')
-  }
+router.post('/profile', (req, res) => {
+  res.render('users/edit-profile', {loggedInUser: req.session.loggedInUser})
 })
 
 module.exports = router;
