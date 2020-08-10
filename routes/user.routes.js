@@ -5,6 +5,24 @@ const BookModel = require('../models/Books.model');
 const MovieModel = require('../models/Movies.model')
 const CountryModel = require('../models/Country.model')
 
+
+router.post('/new-country', (req, res, next) => {
+  if(req.body.countrychoice) {
+    let countryname = req.body.countrychoice;
+    CountryModel.findOne({name:countryname})
+      .then((country) => {
+        MovieModel.find({country:country.name})
+          .then((movies) => {
+            res.render('users/country-details.hbs', {country, movies, loggedInUser: req.session.loggedInUser})
+          })  
+      })  
+  }
+  else {
+    res.redirect('/new-country');
+  }
+})
+
+
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
     res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
@@ -23,6 +41,8 @@ router.get('/map', (req, res, next) => {
   }
 });
 
+
+
 router.get('/new-country', (req, res, next) => {
   if (req.session.loggedInUser){
     CountryModel.find()
@@ -35,10 +55,12 @@ router.get('/new-country', (req, res, next) => {
   }
 });
 
+
+
 router.get('/:id', (req, res) => {
-  CountryModel.findById(req.params.id)
+  CountryModel.find({name: req.params.countryname})
       .then((country) => {
-          res.render('users/country-details.hbs', {country})
+        res.render('users/country-details.hbs', {country})
       })
 })
 
