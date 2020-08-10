@@ -1,0 +1,25 @@
+<div class="user-screen">
+
+<h3>Edit profile</h3>
+
+<form class="form edit-user-form" action="/profile/edit" method="POST">
+
+  <label for="signup-name">Name</label>
+  <input id="edit-name" name="name" type="text" value={{loggedInUser.username}}>
+
+  <label for="signup-email">Email</label>
+  <input id="edit-email" name="email" type="email" value={{loggedInUser.email}}>
+
+  <label for="signup-password">Password</label>
+  <input id="edit-password" name="password" type="password">
+
+  <label for="signup-password-repeat">Repeat password</label>
+  <input id="edit-password-repeat" type="password">
+  
+  <button class="btn edit-profile-btn" type="submit">Edit profile</button>
+</form>
+
+{{#if errorMessage}}
+  <div class="error">{{errorMessage}}</div>
+{{/if}}
+</div>

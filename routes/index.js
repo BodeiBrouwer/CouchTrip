@@ -53,7 +53,7 @@ router.post('/signup', (req, res) => {
               // create that user in the db
               UserModel.create({username: name, email, passwordHash: hashPass })
                 .then(() => {
-                    res.redirect('/profile')
+                    res.redirect('/new-country')
                 })
           })
     })
@@ -87,7 +87,7 @@ router.post('/', (req, res) => {
       if (doesItMatch){
         // loggedInUser = userData
         req.session.loggedInUser = userData
-        res.redirect('/profile')
+        res.redirect('/new-country')
       }
       else {
         res.status(500).render('auth/signin.hbs', {errorMessage: 'Passwords do not match'})
@@ -126,7 +126,7 @@ router.post('/signin', (req, res) => {
       if (doesItMatch){
         // loggedInUser = userData
         req.session.loggedInUser = userData
-        res.redirect('/profile')
+        res.redirect('/new-country')
       }
       else {
         res.status(500).render('auth/signin.hbs', {errorMessage: 'Passwords do not match'})
