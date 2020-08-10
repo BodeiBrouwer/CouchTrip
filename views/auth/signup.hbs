@@ -1,14 +1,23 @@
 <h2>Get started</h2>
 <p>Join CouchTrip now and start travelling the world from your home.</p>
 
-<form action="POST" method="/auth/signup">
+<form action="POST" method="/signup">
+
   <label for="signup-name">Name</label>
   <input id="signup-name" name="name" type="text">
+
   <label for="signup-email">Email</label>
   <input id="signup-email" name="email" type="email">
+
   <label for="signup-password">Password</label>
   <input id="signup-password" name="password" type="password">
+
   <label for="signup-password-repeat">Repeat password</label>
   <input id="signup-password-repeat" type="password">
+  
   <button type="submit">Sign up</button>
 </form>
+
+{{#if errorMessage}}
+  <div class="error">{{errorMessage}}</div>
+{{/if}}

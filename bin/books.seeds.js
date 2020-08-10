@@ -1,6 +1,8 @@
+require('dotenv').config();
 require('../configs/db.config')
 const mongoose = require('mongoose');
 const BooksModel = require('../models/Books.model');
+const axios = require('axios');
 const app = require('../app');
 
 let books = [
@@ -30,10 +32,6 @@ let books = [
   },
   {title: "The Teacher of Cheops",
   author: "Albert Salvadó",
-  country: "Andorra"
-  },
-  {title: "",
-  author: "",
   country: "Andorra"
   },
   {title: "The Return of the Water Spirit",
@@ -144,16 +142,8 @@ let books = [
   author: "Zoila Ellis",
   country: "Belize"
   },
-  {title: "",
-  author: "",
-  country: "Belize"
-  },
   {title: "Stories We Tell Each Other",
   author: "Rashidah Ismaili Abubakr",
-  country: "Benin"
-  },
-  {title: "",
-  author: "",
   country: "Benin"
   },
   {title: "The Circle of Karma ",
@@ -215,10 +205,6 @@ let books = [
   {title: "The Parachute Drop",
   author: "Nobert Zongo",
   country: "Burkina Faso"
-  },
-  {title: "",
-  author: "",
-  country: "Burkina Faso" 
   },
   {title: "Weep Not, Refugee",
   author: "Marie-Therese Toyi",
@@ -616,144 +602,901 @@ let books = [
   author: "",
   country: "Ireland"
   },
-  {title: "",
-  author: "",
+  {title: "The Secret Scripture",
+  author: "Sebastian Barry",
   country: "Ireland"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Falling Out of Time",
+  author: "David Grossman",
+  country: "Israel"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "A Tale of Love and Darkness",
+  author: "Amos Oz",
+  country: "Israel"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Can You Hear Me?",
+  author: "Elena Varvello",
+  country: "Italy"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Gomorrah",
+  author: "Roberto Saviano",
+  country: "Italy"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "The Pirate’s Daughter",
+  author: "Margaret Cezair-Thompson",
+  country: "Jamaica"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Paint the Town Red",
+  author: "Brian Meeks",
+  country: "Jamaica"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "1Q84",
+  author: "Haruki Murakami",
+  country: "Japan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Hotel Iris",
+  author: "Yoko Ogawa",
+  country: "Japan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Time of White Horses",
+  author: "Ibrahim Nasrallah",
+  country: "Jordan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Cities of Salt",
+  author: "Abdulrahman Munif",
+  country: "Jordan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "The Day the World Collapsed",
+  author: "Rollan Seisenbayev",
+  country: "Kazakhstan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "The Silent Steppe",
+  author: "Mukhamet Shayakhmetov",
+  country: "Kazakhstan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "One Day I Will Write About This Place",
+  author: "Binyavanga Wainaina",
+  country: "Kenya"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Wizard of the Crow",
+  author: "Ngũgĩ wa Thiong’o",
+  country: "Kenya"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Waa in Storms",
+  author: "Teweiariki Teaero",
+  country: "Kiribati"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "The Man in Blue Pyjamas",
+  author: "Jalal Barzanji",
+  country: "Kurdistan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Pearling in the Arabian Gulf",
+  author: "Saif Marzooq al-Shamlan",
+  country: "Kuwait"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Women in Kuwait",
+  author: "Haya al-Mughni",
+  country: "Kuwait"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Jamilia",
+  author: "Chinghiz Aitmatov",
+  country: "Kyrgyzstan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Cranes Fly Early",
+  author: "Chinghiz Aitmatov",
+  country: "Kyrgyzstan"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Mother’s Beloved",
+  author: "Outhine Bounyavong",
+  country: "Laos"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "The Free World",
+  author: "David Bezmozgis",
+  country: "Latvia"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "A Woman in Amber",
+  author: "Agate Nesaule",
+  country: "Latvia"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "I Killed Scheherazade",
+  author: "Joumana Haddad",
+  country: "Lebanon"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "June Rain",
+  author: "Jabbour Douhaiy",
+  country: "Lebanon"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Chaka",
+  author: "Thomas Mofolo",
+  country: "Lesotho"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Blanket Boy’s Moon",
+  author: "AS Mopeli-Paulus",
+  country: "Lesotho"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "The House at Sugar Beach",
+  author: "Helene Cooper",
+  country: "Liberia"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "This Child Will Be Great",
+  author: " Ellen Johnson Sirleaf",
+  country: "Liberia"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "In the Country of Men",
+  author: "Hisham Matar",
+  country: "Libya"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Anubis",
+  author: "Ibrahim Al-Khoni",
+  country: "Libya"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "The Noble Forger",
+  author: "CC Bergius",
+  country: "Liechtenstein"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Vilnius Poker",
+  author: "Ricardas Gavelis",
+  country: "Lithuania"
   },
-  {title: "",
-  author: "",
-  country: ""
+  {title: "Hour of the Wolf",
+  author: "Andrius Tapinas",
+  country: "Lithuania"
   },
+  {title: "Amateur",
+  author: "Jean Back",
+  country: "Luxembourg"
+  },
+  {title: "Minute Stories",
+  author: "Robi Gottlieb-Cahen",
+  country: "Luxembourg"
+  },
+  {title: "Scribbles",
+  author: "Rumena Bužarovska",
+  country: "Macedonia"
+  },
+  {title: "Conversation with Spinoza",
+  author: "Goce Smilevski",
+  country: "Macedonia"
+  },
+  {title: "Voices from Madagascar",
+  author: "Jacques Bourgeacq and Liliane Ramarosoa",
+  country: "Madagascar"
+  },
+  {title: "Beyond the Rice Fields",
+  author: "Naivo",
+  country: "Madagascar"
+  },
+  {title: "The Jive Talker",
+  author: "Samson Kambalu",
+  country: "Malawi"
+  },
+  {title: "No Easy Task",
+  author: "Aubrey Kachingwe",
+  country: "Malawi"
+  },
+  {title: "Ripples and Other Stories",
+  author: "Shih-Li Kow",
+  country: "Malaysia"
+  },
+  {title: "This End of The Rainbow",
+  author: "Adibah Amin",
+  country: "Malaysia"
+  },
+  {title: "Dhon Hiyala and Ali Fulhu",
+  author: "Abdullah Sadiq",
+  country: "Maldives"
+  },
+  {title: "Bound to Violence",
+  author: "Yambo Ouloguem",
+  country: "Mali"
+  },
+  {title: "The Strange Destiny of Wangrin",
+  author: "Amadou Hampâté Bâ",
+  country: "Mali"
+  },
+  {title: "Happy Weekend",
+  author: "Immanuel Mifsud",
+  country: "Malta"
+  },
+  {title: "My Century",
+  author: "Herbert Ganado",
+  country: "Malta"
+  },
+  {title: "Marshall Islands Legends and Stories",
+  author: "Ed Daniel Kelin",
+  country: "Marshall Islands"
+  },
+  {title: "For the Good of Mankind",
+  author: "Jack Niedenthal",
+  country: "Marshall Islands"
+  },
+  {title: "Angels of Mauritania and the Curse of the Language",
+  author: "Mohamed Bouya Bamba",
+  country: "Mauritania"
+  },
+  {title: "The Desert and the Drum",
+  author: "Mbarek Ould Beyrouk",
+  country: "Mauritania"
+  },
+  {title: "Watch Them Go Down",
+  author: "Anand Mulloo",
+  country: "Mauritius"
+  },
+  {title: "Benares",
+  author: "Barlen Pyamootoo",
+  country: "Mauritius"
+  },
+  {title: "The Labyrinth of Solitude",
+  author: "Octavio Paz",
+  country: "Mexico"
+  },
+  {title: "Like Water for Chocolate",
+  author: "Laura Esquivel",
+  country: "Mexico"
+  },
+  {title: "The Book of Luelen",
+  author: "Luelen Bernart",
+  country: "Micronesia, Federated States of"
+  },
+  {title: "Moldavian Autumn",
+  author: "Ion Drutse",
+  country: "Moldova"
+  },
+  {title: "The Good Life Elsewhere",
+  author: "Vladimir Lorchenkov",
+  country: "Moldova"
+  },
+  {title: "Grace Kelly: Princesse du Cinema",
+  author: "Richard and Danae Projetti",
+  country: "Monaco"
+  },
+  {title: "The Blue Sky",
+  author: "Galsan Tschinag",
+  country: "Mongolia"
+  },
+  {title: "The Mountain Wreath",
+  author: "Petar II Petrović-Njegoš",
+  country: "Montenegro"
+  },
+  {title: "A Lullaby for No Man’s Wolf",
+  author: "Xenia Popovich",
+  country: "Montenegro"
+  },
+  {title: "The Sacred Night",
+  author: "Tahar Ben Jelloun",
+  country: "Morocco"
+  },
+  {title: "The Arch and the Butterfly",
+  author: "Mohammed Achaari",
+  country: "Morocco"
+  },
+  {title: "The Sleepwalking Land",
+  author: "Mia Couto",
+  country: "Mozambique"
+  },
+  {title: "The First Wife",
+  author: "Paulina Chiziane",
+  country: "Mozambique"
+  },
+  {title: "Smile as they Bow",
+  author: "Nu Nu Yi Inwa",
+  country: "Myanmar"
+  },
+  {title: "Troubled Waters",
+  author: "Joseph Diescho",
+  country: "Namibia"
+  },
+  {title: "The Purple Violet of Oshaantu",
+  author: "Neshani Andreas",
+  country: "Namibia"
+  },
+  {title: "Legends, Traditions and Tales of Nauru",
+  author: "Timothy Detudamo",
+  country: "Nauru"
+  },
+  {title: "Stories from Nauru",
+  author: "Ben Bam Solomon et al",
+  country: "Nauru"
+  },
+  {title: "Buddha’s Orphans",
+  author: "Samrat Upadhyay",
+  country: "Nepal"
+  },
+  {title: "The Lazy Conman and Other Stories",
+  author: "Ajit Baral",
+  country: "Nepal"
+  },
+  {title: "Turkish Delight",
+  author: "Jan Wolkers",
+  country: "Netherlands"
+  },
+  {title: "The Evenings",
+  author: "Gerard Reve",
+  country: "Netherlands"
+  },
+  {title: "Singularity",
+  author: "Charlotte Grimshaw",
+  country: "New Zealand"
+  },
+  {title: "The Bone People",
+  author: "Keri Hulme",
+  country: "New Zealand"
+  },
+  {title: "Infinity in the Palm of her Hand",
+  author: "Gioconda Belli",
+  country: "Nicaragua"
+  },
+  {title: "The Epic of Askia Mohammed",
+  author: "Nouhou Malio",
+  country: "Niger"
+  },
+  {title: "Half of a Yellow Sun",
+  author: "Chimamanda Ngozi Adichie",
+  country: "Nigeria"
+  },
+  {title: "Things Fall Apart",
+  author: "Chinua Achebe",
+  country: "Nigeria"
+  },
+  {title: "My Life and Faith",
+  author: "Ri In Mo",
+  country: "North Korea"
+  },
+  {title: "My Struggle",
+  author: "Karl Ove Knausgaard",
+  country: "Norway"
+  },
+  {title: "Out Stealing Horses",
+  author: "Per Petterson",
+  country: "Norway"
+  },
+  {title: "Smiles of Saints",
+  author: "Ibrahim Farghali",
+  country: "Oman"
+  },
+  {title: "My Grandmother’s Stories",
+  author: "Khadija bint Alawi Al-Dhahab",
+  country: "Oman"
+  },
+  {title: "Moth Smoke",
+  author: "Mohsin Hamid",
+  country: "Pakistan"
+  },
+  {title: "Meatless Days",
+  author: "Sara Suleri",
+  country: "Pakistan"
+  },
+  {title: "Spirits’ Tides",
+  author: "Susan Kloulechad",
+  country: "Palau"
+  },
+  {title: "Tasting the Sky: A Palestinian Childhood",
+  author: "Ibtisam Barakat",
+  country: "Palestine"
+  },
+  {title: "Wild Thorns",
+  author: "Sahar Khalifeh",
+  country: "Palestine"
+  },
+  {title: "The Golden Horse",
+  author: "Juan David Morgan",
+  country: "Panama"
+  },
+  {title: "Maiba",
+  author: "Russell Soaba",
+  country: "Papua New Guinea"
+  },
+  {title: "Two Seasons",
+  author: "Bernard Narokobi",
+  country: "Papua New Guinea"
+  },
+  {title: "I, the Supreme",
+  author: "Augusto Roa Bastos",
+  country: "Paraguay"
+  },
+  {title: "Death in the Andes",
+  author: "Mario Vargas Llosa",
+  country: "Peru"
+  },
+  {title: "The Storyteller",
+  author: "Mario Vargas Llosa",
+  country: "Peru"
+  },
+  {title: "Illustrado",
+  author: "Miguel Syjuco",
+  country: "Philippines"
+  },
+  {title: "Dogeaters",
+  author: "Jessica Hagedorn",
+  country: "Philippines"
+  },
+  {title: "Primeval and Other Times",
+  author: "Olga Tokarczuk",
+  country: "Poland"
+  },
+  {title: "A Grain of Truth",
+  author: "Zygmunt Miloszewski",
+  country: "Poland"
+  },
+  {title: "The Mandarin and Other Stories",
+  author: "Eca de Queiroz",
+  country: "Portugal"
+  },
+  {title: "Blindness",
+  author: "José Saramago",
+  country: "Portugal"
+  },
+  {title: "Victory over Abu Derya",
+  author: "Mohammed Ali",
+  country: "Qatar"
+  },
+  {title: "The Corsair",
+  author: "Abdul Aziz Al Mahmoud",
+  country: "Qatar"
+  },
+  {title: "The Passport",
+  author: "Herta Müller",
+  country: "Romania"
+  },
+  {title: "The Baiut Alley Lads",
+  author: "Filip and Matei Florian",
+  country: "Romania"
+  },
+  {title: "The Hottest Dishes of the Tartar Cuisine",
+  author: "Alina Bronsky",
+  country: "Russia"
+  },
+  {title: "A Hero of Our Time",
+  author: "Mikhail Lermontov",
+  country: "Russia"
+  },
+  {title: "We Wish to Inform You that Tomorrow We Will Be Killed with our Families",
+  author: "Philip Gourevitch",
+  country: "Rwanda"
+  },
+  {title: "Into the Quick of Life",
+  author: "Jean Hatzfeld",
+  country: "Rwanda"
+  },
+  {title: "Only God Can Make a Tree",
+  author: "Bertram Roach",
+  country: "Saint Kitts and Nevis"
+  },
+  {title: "Omeros",
+  author: "Derek Walcott",
+  country: "Saint Lucia"
+  },
+  {title: "A Room on the Hill",
+  author: "Garth St Omer",
+  country: "Saint Lucia"
+  },
+  {title: "Spirits in the Dark",
+  author: "H Nigel Thomas",
+  country: "Saint Vincent and the Grenadines"
+  },
+  {title: "The Moon is Following Me",
+  author: "Cecil Browne",
+  country: "Saint Vincent and the Grenadines"
+  },
+  {title: "Love and Money",
+  author: "Misa Telefoni Retzlaff",
+  country: "Samoa"
+  },
+  {title: "Telesa: The Covenant Keeper",
+  author: "Lani Wendt Young",
+  country: "Samoa"
+  },
+  {title: "The Republic of San Marino",
+  author: "Giuseppe Rossi",
+  country: "San Marino"
+  },
+  {title: "The Shepherd’s House",
+  author: "Olinda Beja",
+  country: "Sao Tome and Principe"
+  },
+  {title: "Girls of Riyadh",
+  author: "Rajaa Al-Sanea",
+  country: "Saudi Arabia"
+  },
+  {title: "Endings",
+  author: "Abdul Rahman Munif",
+  country: "Saudi Arabia"
+  },
+  {title: "So Long a Letter",
+  author: "Mariama Bâ",
+  country: "Senegal"
+  },
+  {title: "Doomi Golo: The Hidden Notebooks",
+  author: "Boubacar Boris Diop",
+  country: "Senegal"
+  },
+  {title: "A Novel About London; Migrations",
+  author: "Milos Crnjanski",
+  country: "Serbia"
+  },
+  {title: "Dictionary of the Khazars",
+  author: "Milorad Pavic",
+  country: "Serbia"
+  },
+  {title: "Voices",
+  author: "Glynn Burridge",
+  country: "Seychelles"
+  },
+  {title: "Shark for Sale",
+  author: "William Travis",
+  country: "Seychelles"
+  },
+  {title: "Fistful of Colours",
+  author: "Su-Chen Christine Lim",
+  country: "Singapore"
+  },
+  {title: "Rivers of Babylon",
+  author: "Peter Pišťanek",
+  country: "Slovakia"
+  },
+  {title: "Tale’s Cemetery Book",
+  author: "Daniela Kapitánová Samko",
+  country: "Slovakia"
+  },
+  {title: "Heaven in a Blackberry Bush",
+  author: "Nataša Kramberger",
+  country: "Slovenia"
+  },
+  {title: "You do Understand",
+  author: "Andrej Blatnik",
+  country: "Slovenia"
+  },
+  {title: "The Alternative",
+  author: "John Saunana",
+  country: "Solomon Islands"
+  },
+  {title: "Sweet and Sour Milk",
+  author: "Nuruddin Farah",
+  country: "Somalia"
+  },
+  {title: "African Delights",
+  author: "Siphiwo Mahala",
+  country: "South Africa"
+  },
+  {title: "Cry, the Beloved Country",
+  author: "Alan Paton",
+  country: "South Africa"
+  },
+  {title: "The Guest",
+  author: "Hwang Sok-yong",
+  country: "South Korea"
+  },
+  {title: "A House on the Road",
+  author: "Lee Hye-Kyung",
+  country: "South Korea"
+  },
+  {title: "To Forgive is Divine Not Human",
+  author: "Julia Duany",
+  country: "South Sudan"
+  },
+  {title: "The Shadow of the Wind",
+  author: "Carlos Ruiz Zafón",
+  country: "Spain"
+  },
+  {title: "Exiled from Almost Everywhere",
+  author: "Juan Goytisolo",
+  country: "Spain"
+  },
+  {title: "Reef",
+  author: "Romesh Gunesekera",
+  country: "Sri Lanka"
+  },
+  {title: "Chinaman",
+  author: "Shehan Karunatilaka",
+  country: "Sri Lanka"
+  },
+  {title: "The Grub Hunter",
+  author: "Amir Tag Elsir",
+  country: "Sudan"
+  },
+  {title: "The Palm House",
+  author: "Tarek Eltayeb",
+  country: "Sudan"
+  },
+  {title: "The Cost of Sugar",
+  author: "Cynthia Mcleod",
+  country: "Suriname"
+  },
+  {title: "Weeding the Flowerbeds",
+  author: "Sarah Mkhonza",
+  country: "Swaziland"
+  },
+  {title: "Chronicler of the Winds",
+  author: "Henning Mankell",
+  country: "Sweden"
+  },
+  {title: "The Hundred-Year-Old Man Who Climbed Out of the Window and Disappeared",
+  author: "Jonas Jonasson",
+  country: "Sweden"
+  },
+  {title: "The Pledge",
+  author: "Friedrich Dürrenmatt",
+  country: "Switzerland"
+  },
+  {title: "A Happy Man",
+  author: "Hansjörg Schertenlieb",
+  country: "Switzerland"
+  },
+  {title: "Sarmada",
+  author: "Fadi Azzam",
+  country: "Syria"
+  },
+  {title: "Breaking Knees",
+  author: "Zakaria Tamer",
+  country: "Syria"
+  },
+  {title: "Crystal Boys",
+  author: "Pai Hsien-yung",
+  country: "Taiwan"
+  },
+  {title: "Hurramabad",
+  author: "Andrei Volos",
+  country: "Tajikistan"
+  },
+  {title: "The Sands of Oxus: Boyhood Reminiscences of Sadriddin Aini",
+  author: "Sadriddin Aini",
+  country: "Tajikistan"
+  },
+  {title: "Desertion",
+  author: "Abdulrazak Gurnah",
+  country: "Tanzania"
+  },
+  {title: "Blood on Our Land",
+  author: "Ismael Mbise",
+  country: "Tanzania"
+  },
+  {title: "No Way Out",
+  author: "Chart Korbjitti",
+  country: "Thailand"
+  },
+  {title: "A Child of the Northeast",
+  author: "Kampoon Boontawee",
+  country: "Thailand"
+  },
+  {title: "An African in Greenland",
+  author: "Tété-Michel Kpomassie",
+  country: "Togo"
+  },
+  {title: "A Providence of War",
+  author: "Joshua Taumoefolau",
+  country: "Tonga"
+  },
+  {title: "Tales of the Tikongs",
+  author: "Epeli Hau’ofa",
+  country: "Tonga"
+  },
+  {title: "A House for Mr Biswas",
+  author: "VS Naipaul",
+  country: "Trinidad and Tobago"
+  },
+  {title: "Near Open Water",
+  author: "Keith Jardim",
+  country: "Trinidad and Tobago"
+  },
+  {title: "The Scents of Marie-Claire",
+  author: "Habib Selmi",
+  country: "Tunisia"
+  },
+  {title: "Talismano",
+  author: "Abdelwahab Meddeb",
+  country: "Tunisia"
+  },
+  {title: "Snow",
+  author: "Orhan Pamuk",
+  country: "Turkey"
+  },
+  {title: "Dear Shameless Death",
+  author: "Latife Tekin",
+  country: "Turkey"
+  },
+  {title: "Unknown Sands",
+  author: "John Kropf",
+  country: "Turkmenistan"
+  },
+  {title: "Cobra",
+  author: "Ak Welsapar",
+  country: "Turkmenistan"
+  },
+  {title: "Tuvalu: A history",
+  author: "Various",
+  country: "Tuvalu"
+  },
+  {title: "Abyssinian Chronicles",
+  author: "Moses Isegawa",
+  country: "Uganda"
+  },
+  {title: "Tropical Fish: Stories Out Of Entebbe",
+  author: "Doreen Baingan",
+  country: "Uganda"
+  },
+  {title: "Death and the Penguin",
+  author: "Andrey Kurkov",
+  country: "Ukraine"
+  },
+  {title: "Wave of Terror",
+  author: "Theodore Odrach",
+  country: "Ukraine"
+  },
+  {title: "Gold Ring",
+  author: "Qais Sedki",
+  country: "United Arab Emirates"
+  },
+  {title: "The Sand Fish",
+  author: "Maha Gargash",
+  country: "United Arab Emirates"
+  },
+  {title: "The Remains of the Day",
+  author: "Kazuo Ishiguro",
+  country: "United Kingdom"
+  },
+  {title: "To the Edge of the Sea",
+  author: "Christina Hall",
+  country: "United Kingdom"
+  },
+  {title: "American Gods",
+  author: "Neil Gaiman",
+  country: "United States of America"
+  },
+  {title: "The Time of New Weather",
+  author: "Sean Murphy",
+  country: "United States of America"
+  },
+  {title: "The Shipyard",
+  author: "Juan Carlos Onetti",
+  country: "Uruguay"
+  },
+  {title: "Lands of Memory",
+  author: "Felisberto Hernández",
+  country: "Uruguay"
+  },
+  {title: "The Railway",
+  author: "Hamid Ismailov",
+  country: "Uzbekistan"
+  },
+  {title: "The Dancer from Khiva: One Muslim Woman’s Quest for Freedom",
+  author: "Bibish",
+  country: "Uzbekistan"
+  },
+  {title: "Laef Blong Mi: From Village to Nation",
+  author: "Sethy Regenvau",
+  country: "Vanuatu"
+  },
+  {title: "Shroud of Secrecy of Gone with the Wind in the Vatican",
+  author: "Luigi Marinello & The Millenari",
+  country: "Vatican City "
+  },
+  {title: "The Sickness",
+  author: "Alberto Barrera Tyszka",
+  country: "Venezuela"
+  },
+  {title: "Falke",
+  author: "Federico Vegas",
+  country: "Venezuela"
+  },
+  {title: "The Joker",
+  author: "Phan Hon Nhien",
+  country: "Vietnam"
+  },
+  {title: "The Sorrow of War",
+  author: "Bao Ninh",
+  country: "Vietnam"
+  },
+  {title: "A Land without Jasmine",
+  author: "Wajdi al-Ahdal",
+  country: "Yemen"
+  },
+  {title: "The Hostage",
+  author: "Zayd Mutee’ Dammaj",
+  country: "Yemen"
+  },
+  {title: "Baking Cakes in Kigali",
+  author: "Gaile Parkin ",
+  country: "Zambia"
+  },
+  {title: "A Cowrie of Hope",
+  author: "Binwell Sinyangwe",
+  country: "Zambia"
+  },
+  {title: "An Elegy for Easterly",
+  author: "Petinah Gappah",
+  country: "Zimbabwe"
+  },
+  {title: "Nervous Conditions",
+  author: "Tsitsi Dangarembga",
+  country: "Zimbabwe"
+  }
 ]
+
+// BooksModel.create(books)
+//   .then(() => {
+//     console.log('Books are inserted')
+//         mongoose.connection.close()
+//             .then(() => {
+//                 console.log('Connection is closed')
+//             })
+//   })
+//   .catch((err) => {
+//     console.log('wow, that did not go well', err)
+// });
+
+// books.forEach((book, i) => {
+//   let myTimeout = []
+//   myTimeout[i]= setInterval(() => {
+//   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
+//   .then((result) => {
+//     book.description = result.data.items.volumeInfo.description;
+//     if (result.data.items.volumeInfo.imageLinks.thumbnail = undefined) {
+//       book.img = 'shorturl.at/lFX69'
+//     }
+//     else {
+//       book.img = result.data.items.volumeInfo.imageLinks.thumbnail;
+//     }
+//     if (result.data.items.volumeInfo.averageRating === undefined) {
+//       book.rating = 'No rating'
+//     }
+//     else {
+//       book.rating = result.data.items.volumeInfo.averageRating;
+//     }
+//     })
+//     .then(() => {
+//       BooksModel.create(book)
+//       console.log('Book inserted!')
+//     })
+//     .catch((err) => {
+//       console.log('Could not insert book', err)
+//     })
+//     .catch((err) => {
+//       console.log('Could not create book', err)
+//     })
+//   clearInterval(myTimeout[i])
+//   }, 5000)
+// })
+
+
+
+// books.forEach((book, i) => {
+//   let myTimeout = []
+//   myTimeout[i]= setInterval(() => {
+
+//     axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book.title}+inauthor:${book.author}&key=${process.env.GOOGLE_API_KEY}`)
+//     .then((result) => {
+//       let bookObj = {
+//       description: result.data.items.volumeInfo.description,
+//       img: result.data.items.volumeInfo.imageLinks ? result.data.items.volumeInfo.imageLinks.thumbnail: '',
+//       rating: result.data.items.volumeInfo.averageRating
+//     }
+//       BooksModel.findOneAndUpdate({title: book.title}, {$set: bookObj})
+//         .then(() => {
+//           console.log('data updated')
+//         })
+//     })
+//     .catch((err) => {
+//       console.log('error', err)
+//     })
+//     clearInterval(myTimeout[i])
+//   }, 2000)
+// })
+
+
+// const CountryModel = require('../models/Country.model')
+
+// let countries = [];
+// let book1;
+// let book2;
+
+// books.forEach(book => {
+//   if (books.indexOf(book)%2 === 0) {
+//     book1 = book.title;
+//   }
+//   else {
+//     book2 = book.title
+//     countries.push({name: book.country, book: [book1, book2]});
+//   }
+// })
+
+// CountryModel.create(countries);

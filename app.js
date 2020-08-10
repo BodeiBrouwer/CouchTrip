@@ -45,14 +45,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+ 
+app.use(session({
+  secret: 'my-pet-cat', //if hack into session this secret will be required
+  cookie: {
+    maxAge: 60*60*24*1000 // = 1 day in millise
+  },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection, //store in this DB
+    ttl: 60*60*24 // = 1 day in seconds
+  })
+}));
 
 // default value for title local
 app.locals.title = 'CouchTrip';
 
-
-
 const index = require('./routes/index');
 app.use('/', index);
 
+const userRoutes = require('./routes/user.routes');
+app.use('/', userRoutes);
 
 module.exports = app;
