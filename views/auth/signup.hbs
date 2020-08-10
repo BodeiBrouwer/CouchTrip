@@ -1,7 +1,7 @@
 <h2>Get started</h2>
 <p>Join CouchTrip now and start travelling the world from your home.</p>
 
-<form method="POST" action="/signup">
+<form class="form signup-form" action="/signup" method="POST">
 
   <label for="signup-name">Name</label>
   <input id="signup-name" name="name" type="text">
@@ -15,7 +15,7 @@
   <label for="signup-password-repeat">Repeat password</label>
   <input id="signup-password-repeat" type="password">
   
-  <button type="submit">Sign up</button>
+  <button class="btn" type="submit">Sign up</button>
 </form>
 
 {{#if errorMessage}}
