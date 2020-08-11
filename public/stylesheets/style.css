@@ -251,7 +251,7 @@ h5 {
   display: flex;
   flex-direction: column;
   width: 300px;
-  margin: 20px 10px;
+  margin: 10px 20px;
   background-color: pink;
   color: #0c6785;
   border-radius: 10px;
@@ -259,7 +259,8 @@ h5 {
 
 .media-info > h4 {
   color: white;
-  font-size: 2rem; }
+  font-size: 2rem;
+  margin: 0 0 5px 0; }
 
 .media-img {
   width: 200px;

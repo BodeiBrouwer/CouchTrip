@@ -10,6 +10,7 @@ const UserModel = require('../models/User.model')
 
 //NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
+  console.log('inside new country')
   res.redirect(`/countries/${req.body.countrychoice}`)
 })
 
@@ -76,6 +77,7 @@ router.get('/countries/:country', (req, res) => {
           MovieModel.find({country:country.name})
             .then((movies) => {
               let myPromises = []
+              console.log('inside countries route')
               books.forEach((book, i) => {
                 myPromises[i] = axios.get(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(book.title)}+inauthor:${encodeURI(book.author)}&key=${process.env.GOOGLE_API_KEY}`)
              })
@@ -103,6 +105,9 @@ router.get('/countries/:country', (req, res) => {
                   myBooks.push(bookInfo)
                 })
               res.render('users/country-details.hbs', {country, movies, books: myBooks, loggedInUser: req.session.loggedInUser})
+             })
+             .catch((err) => {
+              console.log('Error is', err)
              })
               
           }) 
