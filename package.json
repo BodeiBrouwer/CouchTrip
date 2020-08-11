@@ -7,6 +7,10 @@
     "dev": "DEBUG=couchtrip:* nodemon ./bin/www",
     "dev-windows": "nodemon ./bin/www"
   },
+  "engines": {
+    "node": "14.4.0",
+    "npm": "6.14.7"
+  }
   "dependencies": {
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
