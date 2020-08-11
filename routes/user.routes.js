@@ -120,7 +120,7 @@ router.get('/countries/:country', (req, res) => {
 })
 
 router.get('/countries/:country/delete', (req, res) => {
-  UserModel.findOneAndDelete(req.params.country)
+  UserModel.countriesToDo.findOneAndDelete(req.params.country)
       .then(() => {
           res.redirect('/profile')
   })
