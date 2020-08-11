@@ -2,6 +2,10 @@
 
 <h3>{{loggedInUser.username}}'s World</h3>
 
+{{#if errorMessage}}
+  <p>{{errorMessage}}</p>
+{{/if}}
+
 <div id="profile-country-collection">
 
 {{#each countriesToDo}}

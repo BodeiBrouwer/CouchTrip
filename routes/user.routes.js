@@ -16,16 +16,29 @@ router.post('/new-country', (req, res, next) => {
 
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
-    let countriesToDo = [];
+
     let user = req.session.loggedInUser;
-    console.log(user);
-    user.countriesToDo.forEach(countryName => {
-      CountryModel.findOne({name: countryName})
-      .then((country) => {
-        countriesToDo.push(country);
-        res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser, countriesToDo})
-      })
+
+    if (user.countriesToDo.length > 0) {
+    
+    console.log('This is user countries', user.countriesToDo)
+    let myPromises =[]
+    user.countriesToDo.forEach((countryName, i) => {
+      if (countryName != '') {
+      myPromises[i] = CountryModel.findOne({name: countryName})   }   
     })
+    Promise.all(myPromises)
+    .then((countriesToDo) => {
+      console.log(countriesToDo)
+      res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser, countriesToDo})
+    })
+
+    }
+    else {
+      let errorMessage = "You have no countries in your collection yet."
+      res.render('users/profile.hbs', {errorMessage, loggedInUser: req.session.loggedInUser})
+    }
+
   }
   else {
     res.redirect('/signin')
