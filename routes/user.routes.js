@@ -122,7 +122,7 @@ router.get('/countries/:country', (req, res) => {
 })
 
 router.get('/countries/:country/delete', (req, res) => {
-  UserModel.findOneAndDelete(req.params.country)
+  UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$pull: {countriesToDo: req.params.country}})
       .then(() => {
           res.redirect('/profile')
   })
