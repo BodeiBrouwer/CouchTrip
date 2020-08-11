@@ -29,7 +29,6 @@ router.get('/profile', (req, res) => {
     })
     Promise.all(myPromises)
     .then((countriesToDo) => {
-      console.log(countriesToDo)
       res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser, countriesToDo})
     })
 
@@ -45,22 +44,19 @@ router.get('/profile', (req, res) => {
   }
 })
 
-router.get('/map', (req, res, next) => {
-  if (req.session.loggedInUser){
-    res.render('users/country-overview.hbs', {loggedInUser: req.session.loggedInUser})
-  }
-  else {
-    res.redirect('/signin')
-  }
-});
-
-
+// router.get('/map', (req, res, next) => {
+//   if (req.session.loggedInUser){
+//     res.render('users/country-overview.hbs', {loggedInUser: req.session.loggedInUser})
+//   }
+//   else {
+//     res.redirect('/signin')
+//   }
+// });
 
 router.get('/new-country', (req, res, next) => {
   if (req.session.loggedInUser){
     CountryModel.find({})
      .then((countries) => {
-       console.log('Countries are ', countries)
       res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser})
      })
   }
@@ -68,7 +64,6 @@ router.get('/new-country', (req, res, next) => {
     res.redirect('/signin')
   }
 });
-
 
 
 router.get('/countries/:country', (req, res) => {
@@ -107,7 +102,6 @@ router.get('/countries/:country', (req, res) => {
                   bookInfo.title = bookInfo.volumeInfo.title
                   myBooks.push(bookInfo)
                 })
-                console.log(myBooks)
               res.render('users/country-details.hbs', {country, movies, books: myBooks, loggedInUser: req.session.loggedInUser})
              })
               
@@ -121,17 +115,20 @@ router.get('/countries/:country', (req, res) => {
 })
 
 router.get('/countries/:country/delete', (req, res) => {
-  CountryModel.findOneAndDelete(req.params.countryName)
+  UserModel.findOneAndDelete(req.params.country)
       .then(() => {
           res.redirect('/profile')
   })
 })
 
 router.get('/countries/:country/add', (req, res) => {
-  UserModel.findOneAndUpdate(req.body.id)
-      .then((country) => {
-          res.render('edit-todo.hbs', {todo})
+  UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {countriesToDo: req.params.country}})   
+    .then(() => {
+      res.redirect('/profile')
       })
+    .catch(() => {
+      console.log('something is off', err)
+    })
 })
 
 router.post('/profile', (req, res) => {
