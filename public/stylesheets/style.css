@@ -182,7 +182,7 @@ h5 {
   outline: none; }
 
 .login-form {
-  margin-top: 20px; }
+  margin-top: 10px; }
 
 .signin-form {
   margin-top: 40px; }
@@ -209,7 +209,11 @@ h5 {
 
 .intro {
   width: 300px;
-  margin: 30px auto; }
+  margin: 30px auto;
+  padding-bottom: 5px; }
+
+.intro > p {
+  font-size: 0.8rem; }
 
 #profile-country-collection {
   display: flex;
@@ -267,6 +271,40 @@ h5 {
 
 .profile-pic {
   width: 300px; }
+
+.start-logo-box {
+  position: relative;
+  height: 100px;
+  margin-top: 10px; }
+
+.start-logo {
+  width: 120px;
+  position: absolute center center;
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite; }
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg); } }
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+.head-box {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.nav-logo {
+  width: 60px;
+  margin-left: 10px; }
 
 /*# sourceMappingURL=style.css.map */
 
