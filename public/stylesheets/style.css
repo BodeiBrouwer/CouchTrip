@@ -178,6 +178,10 @@ h5 {
   background-color: #0c6785;
   padding: 5px; }
 
+.add-country-btn {
+  background-color: #0c6785;
+  padding: 5px; }
+
 .btn:focus {
   outline: none; }
 
@@ -237,7 +241,8 @@ h5 {
 .country-info > a {
   text-decoration: none;
   color: white;
-  font-size: 0.75rem; }
+  font-size: 0.9rem;
+  margin: 5px; }
 
 .country-info > h4 {
   color: pink; }
