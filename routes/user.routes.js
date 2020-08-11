@@ -6,6 +6,7 @@ const MovieModel = require('../models/Movies.model')
 const CountryModel = require('../models/Country.model')
 
 
+//NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
   if(req.body.countrychoice) {
     let countryname = req.body.countrychoice;
