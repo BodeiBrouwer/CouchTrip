@@ -8,6 +8,8 @@ const CountryModel = require('../models/Country.model')
 const UserModel = require('../models/User.model')
 
 
+
+
 //NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
   console.log('inside new country')
@@ -120,7 +122,7 @@ router.get('/countries/:country', (req, res) => {
 })
 
 router.get('/countries/:country/delete', (req, res) => {
-  UserModel.countriesToDo.findOneAndDelete(req.params.country)
+  UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$pull: {countriesToDo: req.params.country}})
       .then(() => {
           res.redirect('/profile')
   })
