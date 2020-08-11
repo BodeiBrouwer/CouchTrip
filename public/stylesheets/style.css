@@ -211,6 +211,33 @@ h5 {
   width: 300px;
   margin: 30px auto; }
 
+#profile-country-collection {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+
+.country-pic {
+  width: 200px;
+  margin: 0 auto 10px; }
+
+.country-info {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 20px 10px;
+  background-color: #0c6785;
+  color: white;
+  border-radius: 10px;
+  padding: 10px; }
+
+.country-info > a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.75rem; }
+
+.country-info > h4 {
+  color: pink; }
+
 #country-media-collection {
   display: flex;
   justify-content: center;
