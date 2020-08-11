@@ -1,16 +1,17 @@
 <div class="user-screen">
 
-<h3>Profile</h3>
+<h3>{{loggedInUser.username}}'s World</h3>
 
-<img class="profile-pic" src="https://images.unsplash.com/photo-1545239351-e1433db9a918?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80" alt="Profile picture">
+<div id="profile-country-collection">
 
-<div class="user-details">
-  <p><span>Name:</span> {{loggedInUser.username}}</p>
-  <p><span>Email:</span> {{loggedInUser.email}}</p>
-  <p><span>Password:</span> *******</p>
-  <form action="/profile" method="POST">
-    <button class="btn profile-edit-btn" type="submit">Edit</button>
-  </form>
+{{#each countriesToDo}}
+  <div class="country-info">
+    <h4>{{this.name}}</h4>
+    <img class="country-pic" src="https://source.unsplash.com/random" alt="{{this.name}}">
+    <a href="/countries/{{this.name}}">Discover more</a>
+  </div>
+{{/each}}
+
 </div>
 
 </div>

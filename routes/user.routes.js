@@ -26,7 +26,16 @@ router.post('/new-country', (req, res, next) => {
 
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
-    res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
+    let countriesToDo = [];
+    let user = req.session.loggedInUser;
+    console.log(user);
+    user.countriesToDo.forEach(countryName => {
+      CountryModel.findOne({name: countryName})
+      .then((country) => {
+        countriesToDo.push(country);
+        res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser, countriesToDo})
+      })
+    })
   }
   else {
     res.redirect('/signin')
