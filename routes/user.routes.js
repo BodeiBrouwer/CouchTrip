@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const bcryptjs = require('bcryptjs');
+const axios = require('axios')
 const BookModel = require('../models/Books.model');
 const MovieModel = require('../models/Movies.model')
 const CountryModel = require('../models/Country.model')
@@ -8,19 +9,7 @@ const CountryModel = require('../models/Country.model')
 
 //NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
-  if(req.body.countrychoice) {
-    let countryname = req.body.countrychoice;
-    CountryModel.findOne({name:countryname})
-      .then((country) => {
-        MovieModel.find({country:country.name})
-          .then((movies) => {
-            res.render('users/country-details.hbs', {country, movies, loggedInUser: req.session.loggedInUser})
-          })  
-      })  
-  }
-  else {
-    res.redirect('/new-country');
-  }
+  res.redirect(`/countries/${req.body.countrychoice}`)
 })
 
 
@@ -46,8 +35,9 @@ router.get('/map', (req, res, next) => {
 
 router.get('/new-country', (req, res, next) => {
   if (req.session.loggedInUser){
-    CountryModel.find()
+    CountryModel.find({})
      .then((countries) => {
+       console.log('Countries are ', countries)
       res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser})
      })
   }
@@ -58,11 +48,52 @@ router.get('/new-country', (req, res, next) => {
 
 
 
-router.get('/:id', (req, res) => {
-  CountryModel.find({name: req.params.countryname})
+router.get('/countries/:country', (req, res) => {
+   let countryname = req.params.country;
+    CountryModel.findOne({name:countryname})
       .then((country) => {
-        res.render('users/country-details.hbs', {country})
-      })
+         BookModel.find({country:country.name})
+         .then((books) => {
+          
+          MovieModel.find({country:country.name})
+            .then((movies) => {
+              let myPromises = []
+              books.forEach((book, i) => {
+                myPromises[i] = axios.get(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(book.title)}+inauthor:${encodeURI(book.author)}&key=${process.env.GOOGLE_API_KEY}`)
+             })
+             let myBooks = []
+             Promise.all(myPromises)
+             .then((results) => {
+                results.forEach((result) => {
+                  let bookInfo = result.data.items[0]
+                
+                  bookInfo.description = bookInfo.volumeInfo.description;
+                  if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined) {
+                    bookInfo.img = 'shorturl.at/lFX69'
+                  }
+                  else {
+                    bookInfo.img = bookInfo.volumeInfo.imageLinks.thumbnail;
+                  }
+                  if (bookInfo.volumeInfo.averageRating === undefined) {
+                    bookInfo.rating = 0
+                  }
+                  else {
+                    bookInfo.rating = bookInfo.volumeInfo.averageRating;
+                  }
+                  bookInfo.title = bookInfo.volumeInfo.title
+                  myBooks.push(bookInfo)
+                })
+                console.log(myBooks)
+              res.render('users/country-details.hbs', {country, movies, books: myBooks, loggedInUser: req.session.loggedInUser})
+             })
+              
+          }) 
+         
+      })  
+    })
+    .catch((err) => {
+      console.log(`google is difficult`, err)
+    })
 })
 
 
