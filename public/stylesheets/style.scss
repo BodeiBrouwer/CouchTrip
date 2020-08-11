@@ -50,7 +50,7 @@ body {
 }
 
 .user-screen {
-  margin-top: 200px;
+  margin-top: 150px;
 }
 
 .user-details {
@@ -266,10 +266,22 @@ h5 {
   flex-direction: column;
   width: 300px;
   margin: 10px;
+  background-color: white;
+  color: #0c6785;
 }
 
-.media-image {
+.media-info > h4{
+  color: #0c6785;
+  font-size: 2rem;
+}
+
+.media-img {
   width: 200px;
+  margin: auto;
+}
+
+.profile-pic {
+  width: 300px;
 }
 
 
