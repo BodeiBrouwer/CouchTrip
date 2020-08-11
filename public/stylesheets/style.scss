@@ -265,19 +265,26 @@ h5 {
   display: flex;
   flex-direction: column;
   width: 300px;
-  margin: 10px;
-  background-color: white;
+  margin: 20px 10px;
+  background-color: pink;
   color: #0c6785;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .media-info > h4{
-  color: #0c6785;
+  color: white;
   font-size: 2rem;
 }
 
 .media-img {
   width: 200px;
-  margin: auto;
+  margin: 0 auto 10px;
+}
+
+.rating {
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .profile-pic {
