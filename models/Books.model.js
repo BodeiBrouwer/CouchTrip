@@ -11,7 +11,7 @@ const bookSchema = new Schema({
   },
   country: String,
   description: String,
-  rating: Number,
+  rating: String,
   img: String
 });
 

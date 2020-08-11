@@ -5,6 +5,7 @@ const axios = require('axios')
 const BookModel = require('../models/Books.model');
 const MovieModel = require('../models/Movies.model')
 const CountryModel = require('../models/Country.model')
+const UserModel = require('../models/User.model')
 
 
 //NEW COUNTRY ROUTE
@@ -84,11 +85,12 @@ router.get('/countries/:country', (req, res) => {
                     bookInfo.img = bookInfo.volumeInfo.imageLinks.thumbnail;
                   }
                   if (bookInfo.volumeInfo.averageRating === undefined) {
-                    bookInfo.rating = 0
+                    bookInfo.rating = "no rating"
                   }
                   else {
                     bookInfo.rating = bookInfo.volumeInfo.averageRating;
                   }
+                  bookInfo.author = bookInfo.volumeInfo.authors
                   bookInfo.title = bookInfo.volumeInfo.title
                   myBooks.push(bookInfo)
                 })
@@ -105,6 +107,19 @@ router.get('/countries/:country', (req, res) => {
     })
 })
 
+router.get('/countries/:country/delete', (req, res) => {
+  CountryModel.findOneAndDelete(req.params.countryName)
+      .then(() => {
+          res.redirect('/profile')
+  })
+})
+
+router.get('/countries/:country/add', (req, res) => {
+  UserModel.findOneAndUpdate(req.body.id)
+      .then((country) => {
+          res.render('edit-todo.hbs', {todo})
+      })
+})
 
 router.post('/profile', (req, res) => {
   res.render('users/edit-profile', {loggedInUser: req.session.loggedInUser})

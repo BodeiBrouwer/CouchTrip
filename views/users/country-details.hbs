@@ -6,6 +6,7 @@
 
 {{#each movies}}
   <div class="media-info">
+    <h3>Movie</h3>
     <h4>{{this.title}}</h4>
     <img class="media-img" src="{{this.img}}" alt="{{this.title}} Poster">
     <p>{{this.description}}</p>
@@ -15,21 +16,16 @@
 
 {{#each books}}
   <div class="media-info">
+    <h3>Book</h3>
     <h4>{{this.title}}</h4>
     <img class="media-img" src="{{this.img}}" alt="{{this.title}} Poster">
+    <p><b>by {{this.author}}</b></p>
     <p>{{this.description}}</p>
     <p class="rating">Rating on Google Books: {{this.rating}}</p>
   </div>
 {{/each}}
 
-<!--
-Show only one button based on whether country is part of user's collection
--->
-  <form method="POST" action="{{country}}/delete">
-    <label>Delete country from my map</label>
-    <button class="btn" type="submit">Delete</button>
-  </form>
-  <form method="POST" action="{{country}}/add">
-    <label>Add country to my map</label>
-    <button class="btn" type="submit">Add</button>
-  </form>
+
+  <a href="/countries/{{country}}/add">
+     <button type="submit" class="btn btn-primary">Add to my trips</button>
+</a>
