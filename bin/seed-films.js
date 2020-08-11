@@ -21,11 +21,11 @@ let movies = [
 
   {title: 'Zonja nga qyteti',
   country: 'Albania',
-  imdb: 'tt1092037'
+  imdb: 'tt0173504'
   },
   {title: 'Time of the Comet',
   country: 'Albania',
-  imdb: 'tt0173504'
+  imdb: 'tt1092037'
   },
 
   {title: 'Until the Birds Return',
@@ -326,20 +326,20 @@ let movies = [
   },
 
   {title: 'Oxhide',
-  country: 'China ',
+  country: 'China',
   imdb: 'tt0453795'
   },
   {title: 'A Touch of Sin',
-  country: 'China ',
+  country: 'China',
   imdb: 'tt2852400'
   },
 
   {title: 'Embrace of the Serpent',
-  country: 'Colombia ',
+  country: 'Colombia',
   imdb: 'tt4285496'
   },
   {title: 'Land and Shade',
-  country: 'Colombia ',
+  country: 'Colombia',
   imdb: 'tt4663992'
   },
 
@@ -362,11 +362,11 @@ let movies = [
   },
 
   {title: 'The Protectors',
-  country: 'Congo, Republic of ',
+  country: 'Congo, Republic of',
   imdb: 'tt6075918'
   },
   {title: 'National Diploma',
-  country: 'Congo, Republic of ',
+  country: 'Congo, Republic of',
   imdb: 'tt3596272'
   },
 
@@ -641,29 +641,29 @@ let movies = [
   },
 
   {title: 'Mortu Nega',
-  country: 'Guinea-Bissau ',
+  country: 'Guinea-Bissau',
   imdb: 'tt0095658'
   },
   {title: 'My Voice',
-  country: 'Guinea-Bissau ',
+  country: 'Guinea-Bissau',
   imdb: 'tt0296099'
   },
 
   {title: 'Guyana: Cult of the Damned',
-  country: 'Guyana ',
+  country: 'Guyana',
   imdb: 'tt0080833'
   },
   {title: 'Thunder in Guyana',
-  country: 'Guyana ',
+  country: 'Guyana',
   imdb: 'tt0439010'
   },
 
   {title: 'Ayiti mon amour',
-  country: 'Haiti ',
+  country: 'Haiti',
   imdb: 'tt5974362'
   },
   {title: 'Strange Things',
-  country: 'Haiti ',
+  country: 'Haiti',
   imdb: 'tt1338552'
   },
 
@@ -1583,7 +1583,7 @@ let movies = [
   },
 
   {title: 'Homecoming',
-  country: 'Tanzania ',
+  country: 'Tanzania',
   imdb: 'tt5116212'
   },
   {title: 'Kwanini',
@@ -1795,7 +1795,12 @@ movies.forEach((movie) => {
   axios.get(`http://www.omdbapi.com/?i=${movie.imdb}&apikey=${process.env.OMDBKEY}`)
   .then((result) => {
     movie.description = result.data.Plot;
-    movie.img = result.data.Poster;
+    if (result.data.Poster === 'N/A') {
+      movie.img = 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+    }
+    else {
+      movie.img = result.data.Poster;
+    }
     if (result.data.Ratings[0] === undefined) {
       movie.rating = 'No rating'
     }
