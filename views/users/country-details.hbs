@@ -13,9 +13,14 @@
   </div>
 {{/each}}
 
-</div>
-
-
+{{#each books}}
+  <div class="media-info">
+    <h4>{{this.title}}</h4>
+    <img class="media-img" src="{{this.img}}" alt="{{this.title}} Poster">
+    <p>{{this.description}}</p>
+    <p class="rating">Rating on Google Books: {{this.rating}}</p>
+  </div>
+{{/each}}
 
 <!--
 Show only one button based on whether country is part of user's collection
