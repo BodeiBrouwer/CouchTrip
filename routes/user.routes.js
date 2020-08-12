@@ -140,17 +140,19 @@ router.get('/countries/:country/add', (req, res) => {
       if (user.countriesToDo.includes(req.params.country)) {
         res.redirect('/profile');
       }
-    })
-  UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {countriesToDo: req.params.country}})   
-    .then(() => {
-        UserModel.findById(req.session.loggedInUser._id)
-         .then((user)=> {
-            req.session.loggedInUser = user
-            res.redirect('/profile')
-         })
-      })
-    .catch((err) => {
-      console.log('something is off', err)
+      else {
+        UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {countriesToDo: req.params.country}})   
+        .then(() => {
+            UserModel.findById(req.session.loggedInUser._id)
+             .then((user)=> {
+                req.session.loggedInUser = user
+                res.redirect('/profile')
+             })
+          })
+        .catch((err) => {
+          console.log('something is off', err)
+        })
+      }
     })
 })
 
