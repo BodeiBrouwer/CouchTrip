@@ -212,6 +212,11 @@ h5 {
   padding: 5px;
 }
 
+.add-country-btn {
+  background-color: #0c6785;
+  padding: 5px;
+}
+
 .btn:focus {
   outline: none;
 }
@@ -285,7 +290,8 @@ font-size: 0.8rem;
 .country-info > a {
   text-decoration: none;
   color: white;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+  margin: 5px;
 }
 
 .country-info > h4 {
@@ -356,4 +362,64 @@ font-size: 0.8rem;
   width: 60px;
   margin-left: 10px;
 }
+
+.whatsapp-box {
+  background-color: #0c6785;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 300px;
+  margin: auto;
+}
+
+.whatsapp-box > a {
+  font-size: 1rem;
+}
+
+/* styles for '...' */ 
+.block-with-text {
+  /* hide text if it more than N lines  */
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative; 
+  /* use this value to count block height */
+  line-height: 1.2em;
+  /* max-height = line-height (1.2) * lines max number (3) */
+  max-height: 7.2em; 
+  /* fix problem when last visible word doesn't adjoin right side  */
+  text-align: justify;  
+  /* place for '...' */
+
+  padding-right: 1em;
+}
+/* create the ... */
+.block-with-text:before {
+  /* points in the end */
+  content: '...';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of block */
+  right: 0;
+  bottom: 0;
+}
+/* hide ... if we have text, which is less than or equal to max lines */
+.block-with-text:after {
+  /* points in the end */
+  content: '';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of text */
+  right: 0;
+  /* set width and height */
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  /* bg color = bg color under block */
+  background: white;
+}
+
+
+
+
+
 /*# sourceMappingURL=style.css.map */ 

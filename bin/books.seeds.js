@@ -68,19 +68,19 @@ let books = [
   },
   {title: "The Songlines",
   author: "Bruce Chatwin",
-  country: "Australia "
+  country: "Australia"
   },
   {title: "Cloudstreet ",
   author: "Tim Winton",
-  country: "Australia "
+  country: "Australia"
   },
   {title: "Frozen Time",
   author: "Anna Kim",
-  country: "Austria "
+  country: "Austria"
   },
   {title: "The Torch in my Ear",
   author: "Elias Canetti ",
-  country: "Austria "
+  country: "Austria"
   },
   {title: "Magnolia",
   author: "Gioulzar Akhmedova",
@@ -92,19 +92,19 @@ let books = [
   },
   {title: "God’s Angry Babies",
   author: "Ian Strachan",
-  country: "Bahamas"
+  country: "The Bahamas"
   },
   {title: "Thine is the Kingdom",
   author: "Garth Buckner",
-  country: "Bahamas"
+  country: "The Bahamas"
   },
   {title: "Quixotiq ",
   author: "Ali Al Saeed",
-  country: "Bahrain "
+  country: "Bahrain"
   },
   {title: "Yummah",
   author: "Sarah A Al Sahfei",
-  country: "Bahrain "
+  country: "Bahrain"
   },
   {title: "Shame",
   author: "Taslima Nasrin",
@@ -164,11 +164,11 @@ let books = [
   },
   {title: "Zlata’s Diary",
   author: "Zlata Filipovic",
-  country: "Bosnia and Herzegovina "
+  country: "Bosnia and Herzegovina"
   },
   {title: "The Bridge on the Drina",
   author: "Ivo Andric",
-  country: "Bosnia and Herzegovina "
+  country: "Bosnia and Herzegovina"
   },
   {title: "The Lion Children",
   author: "Angus, Maisie and Travers McNeice",
@@ -257,10 +257,6 @@ let books = [
   {title: "Told by Starlight in Chad",
   author: "Joseph Brahim Seid",
   country: "Chad"
-  },
-  {title: "",
-  author: "",
-  country: "Chad" 
   },
   {title: "The Savage Detectives",
   author: "Roberto Bolano",
@@ -1368,7 +1364,7 @@ let books = [
   },
   {title: "Shroud of Secrecy of Gone with the Wind in the Vatican",
   author: "Luigi Marinello & The Millenari",
-  country: "Vatican City "
+  country: "Vatican City"
   },
   {title: "The Sickness",
   author: "Alberto Barrera Tyszka",
@@ -1412,7 +1408,8 @@ let books = [
   }
 ]
 
-BooksModel.create(books)
+function seedBooks(){
+  BooksModel.create(books)
   .then(() => {
     console.log('Books are inserted')
         mongoose.connection.close()
@@ -1423,26 +1420,38 @@ BooksModel.create(books)
   .catch((err) => {
     console.log('wow, that did not go well', err)
 });
+}
 
+function booksCountries (){
+  const CountryModel = require('../models/Country.model')
 
-const CountryModel = require('../models/Country.model')
-
-
-books.forEach(book => {
-  let book1;
-  let book2;
-  if (books.indexOf(book)%2 === 0) {
-    book1 = book.title;
-    CountryModel.updateOne({name: book.country}, {$push: {books: book1}})
+  books.forEach(book => {
+    let book1;
+    let book2;
+    if (books.indexOf(book)%2 === 0) {
+      book1 = book.title;
+      CountryModel.updateOne({name: book.country}, {$push: {books: book1}})
+        .then(()=> {
+          console.log('update successful')
+        })
+    }
+    else {
+      book2 = book.title;
+      CountryModel.updateOne({name: book.country}, {$push: {books: book2}})
       .then(()=> {
-        console.log('update successful')
+        console.log('update book2 successful')
       })
-  }
-  else {
-    book2 = book.title;
-    CountryModel.updateOne({name: book.country}, {$push: {books: book2}})
-    .then(()=> {
-      console.log('update book2 successful')
-    })
-  }
-})
+    }
+  })
+}
+
+mongoose
+  .connect(`${`mongodb+srv://bodei:fwvLZXk1JmzcOmp6@cluster0.0nyn1.mongodb.net/couchtrip?retryWrites=true&w=majority`}`, {useNewUrlParser: true})
+  .then(x => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+    seedBooks()
+    booksCountries()
+  })
+  .catch(err => {
+    console.error('Error connecting to mongo', err)
+  });
