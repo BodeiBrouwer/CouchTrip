@@ -124,22 +124,30 @@ router.get('/countries/:country', (req, res) => {
 router.get('/countries/:country/delete', (req, res) => {
   UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$pull: {countriesToDo: req.params.country}})
       .then(() => {
-          res.redirect('/profile')
+        UserModel.findById(req.session.loggedInUser._id)
+        .then((user)=> {
+           req.session.loggedInUser = user
+           res.redirect('/profile')
+        })
   })
 })
 
 
 
 router.get('/countries/:country/add', (req, res) => {
+  UserModel.findById(req.session.loggedInUser._id)
+    .then((user)=> {
+      if (user.countriesToDo.includes(req.params.country)) {
+        res.redirect('/profile');
+      }
+    })
   UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {countriesToDo: req.params.country}})   
     .then(() => {
-      req.session.save(function(err) {
-        // session saved
-      })
-      req.session.reload(function(err) {
-        console.log('LOGGED IN USER', req.session.loggedInUser)
-        res.redirect('/profile')
-      })
+        UserModel.findById(req.session.loggedInUser._id)
+         .then((user)=> {
+            req.session.loggedInUser = user
+            res.redirect('/profile')
+         })
       })
     .catch((err) => {
       console.log('something is off', err)
