@@ -9,7 +9,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/couchtrip'
+const MONDOGB_URL = process.env.MONGODB_URI || 'mongodb://localhost/couchtrip'
 
 mongoose
   .connect(`${MONDOGB_URL}`, {useNewUrlParser: true})
