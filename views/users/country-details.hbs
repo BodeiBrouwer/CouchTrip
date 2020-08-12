@@ -1,8 +1,11 @@
 
 <h3>{{country.name}}</h3>
 
-<div id="country-media-collection">
+<div class="whatsapp-box">
+  <a href="https://wa.me/?text=I%20am%20travelling%20to%20{{country.name}}%20on%20CouchTrip.%20Come%20join%20me%20for%20a%20movie%20night!%20https%3A%2F%2Fwww.couchtrip.herokuapp.com%2F">Invite your friends to a movie night on WhatsApp</a>
+</div>
 
+<div id="country-media-collection">
 
 {{#each movies}}
   <div class="media-info">
@@ -20,12 +23,12 @@
     <h4>{{this.title}}</h4>
     <img class="media-img" src="{{this.img}}" alt="{{this.title}} Poster">
     <p><b>by {{this.author}}</b></p>
-    <p>{{this.description}}</p>
+    <p class="block-with-text">{{this.description}}</p>
     <p class="rating">Rating on Google Books: {{this.rating}}</p>
   </div>
 {{/each}}
 
 
 <a href="/countries/{{country}}/add">
-     <button type="submit" class="btn btn-primary">Add to my trips</button>
+     <button type="submit" class="btn add-country-btn">Add to my trips</button>
 </a>
