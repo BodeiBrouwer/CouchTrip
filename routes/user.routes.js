@@ -8,11 +8,8 @@ const CountryModel = require('../models/Country.model')
 const UserModel = require('../models/User.model')
 
 
-
-
 //NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
-  console.log('inside new country')
   res.redirect(`/countries/${req.body.countrychoice}`)
 })
 
@@ -47,15 +44,6 @@ router.get('/profile', (req, res) => {
   }
 })
 
-// router.get('/map', (req, res, next) => {
-//   if (req.session.loggedInUser){
-//     res.render('users/country-overview.hbs', {loggedInUser: req.session.loggedInUser})
-//   }
-//   else {
-//     res.redirect('/signin')
-//   }
-// });
-
 router.get('/new-country', (req, res, next) => {
   if (req.session.loggedInUser){
     CountryModel.find({})
@@ -70,6 +58,7 @@ router.get('/new-country', (req, res, next) => {
 
 
 router.get('/countries/:country', (req, res) => {
+  if (req.session.loggedInUser){
    let countryname = req.params.country;
     CountryModel.findOne({name:countryname})
       .then((country) => {
@@ -79,7 +68,6 @@ router.get('/countries/:country', (req, res) => {
           MovieModel.find({country:country.name})
             .then((movies) => {
               let myPromises = []
-              console.log('inside countries route')
               books.forEach((book, i) => {
                 myPromises[i] = axios.get(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(book.title)}+inauthor:${encodeURI(book.author)}&key=${process.env.GOOGLE_API_KEY}`)
              })
@@ -109,7 +97,6 @@ router.get('/countries/:country', (req, res) => {
               res.render('users/country-details.hbs', {country, movies, books: myBooks, loggedInUser: req.session.loggedInUser})
              })
              .catch((err) => {
-              console.log('Error is', err)
              })
               
           }) 
@@ -117,8 +104,11 @@ router.get('/countries/:country', (req, res) => {
       })  
     })
     .catch((err) => {
-      console.log(`google is difficult`, err)
     })
+  }
+  else {
+    res.redirect('/signin')
+  }
 })
 
 router.get('/countries/:country/delete', (req, res) => {
@@ -134,12 +124,16 @@ router.get('/countries/:country/add', (req, res) => {
       res.redirect('/profile')
       })
     .catch(() => {
-      console.log('something is off', err)
     })
 })
 
 router.post('/profile', (req, res) => {
+  if (req.session.loggedInUser){
   res.render('users/edit-profile', {loggedInUser: req.session.loggedInUser})
-})
+}
+else {
+  res.redirect('/signin')
+}
+});
 
 module.exports = router;
