@@ -8,10 +8,10 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-
 const MONDOGB_URL = process.env.MONGODB_URI || 'mongodb://localhost/couchtrip'
+
 mongoose
-  .connect(`${MONGODB_URI}`, {useNewUrlParser: true})
+  .connect(`${MONDOGB_URLnpm au}`, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

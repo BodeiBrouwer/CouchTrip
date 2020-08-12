@@ -138,10 +138,10 @@ router.post('/signin', (req, res) => {
 })
 
 router.get('/logout', (req, res, next) => {
-  req.session.destroy((err) => {
-    // cannot access session here
-    res.redirect("/");
+  req.logout();
+  res.clearCookie('my-pet-cat');
+  req.session.destroy();
+  res.redirect('/');
   });
-});
 
 module.exports = router;
