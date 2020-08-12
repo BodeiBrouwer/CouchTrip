@@ -132,12 +132,26 @@ router.get('/countries/:country/delete', (req, res) => {
   })
 })
 
+
+
 router.get('/countries/:country/add', (req, res) => {
-  UserModel.findOneAndUpdate(req.body.id)
-      .then((country) => {
-          res.render('edit-todo.hbs', {todo})
+  UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {countriesToDo: req.params.country}})   
+    .then(() => {
+      req.session.save(function(err) {
+        // session saved
       })
+      req.session.reload(function(err) {
+        console.log('LOGGED IN USER', req.session.loggedInUser)
+        res.redirect('/profile')
+      })
+      })
+    .catch((err) => {
+      console.log('something is off', err)
+    })
 })
+
+
+
 
 router.post('/profile', (req, res) => {
   res.render('users/edit-profile', {loggedInUser: req.session.loggedInUser})
