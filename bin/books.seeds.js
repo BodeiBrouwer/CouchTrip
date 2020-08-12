@@ -1446,7 +1446,7 @@ function booksCountries (){
 }
 
 mongoose
-  .connect(`${`mongodb+srv://bodei:fwvLZXk1JmzcOmp6@cluster0.0nyn1.mongodb.net/couchtrip?retryWrites=true&w=majority`}`, {useNewUrlParser: true})
+  .connect(`${MONGODB_URI}`, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
     seedBooks()

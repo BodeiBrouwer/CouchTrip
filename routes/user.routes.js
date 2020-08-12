@@ -78,7 +78,7 @@ router.get('/countries/:country', (req, res) => {
                   let bookInfo = result.data.items[0]
                 
                   bookInfo.description = bookInfo.volumeInfo.description;
-                  if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined) {
+                  if (bookInfo.volumeInfo.imageLinks.thumbnail === undefined) {
                     bookInfo.img = 'shorturl.at/lFX69'
                   }
                   else {
@@ -145,8 +145,6 @@ router.get('/countries/:country/add', (req, res) => {
       }
     })
 })
-
-
 
 
 router.post('/profile', (req, res) => {
