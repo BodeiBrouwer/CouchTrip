@@ -17,6 +17,7 @@ const userSchema = new Schema({
     },
     countriesVisited: Array,
     countriesToDo: Array,
+    profilePic: String,
     favouritePlaces: Array,
     favouriteBooks: Array,
     favouriteMovies: Array
