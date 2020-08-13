@@ -115,15 +115,12 @@ router.get('/countries/:country', (req, res) => {
       })  
     })
     .catch((err) => {
-<<<<<<< HEAD
-=======
       let errorMessage = 'Please pick an actual country.'
       CountryModel.find({})
      .then((countries) => {
       res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser, errorMessage})
       })
       console.log(`google is difficult`, err)
->>>>>>> origin/britta-branch
     })
   }
   else {
