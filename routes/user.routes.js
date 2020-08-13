@@ -26,9 +26,6 @@ router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
     // res.json({ secure_url: req.file.path });
 })
 
-
-
-
 //NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
   res.redirect(`/countries/${req.body.countrychoice}`)
