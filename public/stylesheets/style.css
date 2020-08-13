@@ -132,6 +132,9 @@ body {
   .new-country-screen > form > input {
     border-bottom: 2px solid #0c6785; } }
 
+.new-country-screen {
+  margin-top: 200px; }
+
 p {
   font-size: 0.9rem; }
 
