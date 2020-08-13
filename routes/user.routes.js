@@ -20,9 +20,9 @@ router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
       return;
     }
     let user = req.session.loggedInUser;
-    UserModel.findByIdAndUpdate(user._id, {$set: {profilePic: '${req.file.path}'}})
+    UserModel.findByIdAndUpdate(user._id, {$set: {profilePic: req.file.path}})
       .then((loggedInUser) => {
-        res.render('users/profile', {loggedInUser})
+        res.redirect('/profile')
       })
     // res.json({ secure_url: req.file.path });
 })

@@ -6,8 +6,8 @@ require('dotenv').config();
 
 cloudinary.config({
   cloud_name: 'deravtpot',
-  api_key: '${process.env.CLOUDINARYKEY}',
-  api_secret: '${process.env.CLOUDINARYSECRET}'
+  api_key: process.env.CLOUDINARYKEY,
+  api_secret: process.env.CLOUDINARYSECRET
 });
 
 const storage = new CloudinaryStorage({

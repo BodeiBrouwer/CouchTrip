@@ -402,6 +402,9 @@ h5 {
   align-items: center;
   margin: 5px; }
 
+.upload-btn {
+  background-color: #0c6785; }
+
 .error-message {
   color: #0c6785; }
 
