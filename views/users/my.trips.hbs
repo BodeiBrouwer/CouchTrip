@@ -2,20 +2,12 @@
 
   <h3>{{loggedInUser.username}}'s World</h3>
 
-  <div id="world-map" style="width: 600px; height: 400px"></div>
-  <script>
-    $(function () {
-      $('#world-map').vectorMap({ map: 'world_mill' });
-    });
-  </script>
-
   {{#if errorMessage}}
   <p>{{errorMessage}}</p>
   <a href="/new-country">
     <button class="btn edit-profile-btn" type="submit">Take a trip</button>
   </a>
   {{/if}}
-
 
   <div id="profile-country-collection">
 
