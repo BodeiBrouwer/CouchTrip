@@ -42,7 +42,6 @@ router.post('/new-country/random', (req, res, next) => {
     })
 })
 
-
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
     UserModel.findById(req.session.loggedInUser._id)
@@ -115,11 +114,11 @@ router.get('/countries/:country', (req, res) => {
              .then((results) => {
                 results.forEach((result, i) => {
                   if (result.data.items){
-                    let bookInfo = result.data.items[0]
-                
+                    let bookInfo = result.data.items[0] 
                     bookInfo.description = bookInfo.volumeInfo.description;
-                    if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined) {
-                      bookInfo.img = 'shorturl.at/lFX69'
+
+                    if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined || null || '') {
+                      bookInfo.img = 'https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg'
                     }
                     else {
                       bookInfo.img = bookInfo.volumeInfo.imageLinks.thumbnail;
@@ -138,7 +137,7 @@ router.get('/countries/:country', (req, res) => {
                     myBooks.push({
                       title: books[i].title,
                       author: books[i].author,
-                      img: 'shorturl.at/lFX69',
+                      img: 'https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg',
                       rating: 'no rating',
                     })
                   }

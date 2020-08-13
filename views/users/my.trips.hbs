@@ -1,30 +1,37 @@
 <div class="user-screen">
 
-<h3>{{loggedInUser.username}}'s World</h3>
+  <h3>{{loggedInUser.username}}'s World</h3>
 
-{{#if errorMessage}}
+  {{!-- <div id="world-map" style="width: 600px; height: 400px"></div>
+  <script>
+    $(function () {
+      $('#world-map').vectorMap({ map: 'world_mill' });
+    });
+  </script> --}}
+
+  {{#if errorMessage}}
   <p>{{errorMessage}}</p>
   <a href="/new-country">
-<button class="btn edit-profile-btn" type="submit">Take a trip</button>
-</a>
-{{/if}}
+    <button class="btn edit-profile-btn" type="submit">Take a trip</button>
+  </a>
+  {{/if}}
 
 
-<div id="profile-country-collection">
+  <div id="profile-country-collection">
 
-{{#each countriesToDo}}
-  <div class="country-info">
-    <h4>{{this.name}}</h4>
-    <img class="country-pic" src="https://source.unsplash.com/random/?{{this.name}}" alt="{{this.name}}">
-    <a href="/countries/{{this.name}}">Discover more</a>
-    <a href="/countries/{{this.name}}/delete">
-     <button type="submit" class="btn btn-primary">Delete from my trips</button>
-    </a>  
+    {{#each countriesToDo}}
+    <div class="country-info">
+      <h4>{{this.name}}</h4>
+      <img class="country-pic" src="https://source.unsplash.com/random/?{{this.name}}" alt="{{this.name}}">
+      <a href="/countries/{{this.name}}">Discover more</a>
+      <a href="/countries/{{this.name}}/delete">
+        <button type="submit" class="btn btn-primary">Delete from my trips</button>
+      </a>
+    </div>
+    {{/each}}
+
+
+
   </div>
-{{/each}}
-
-
-
-</div>
 
 </div>
