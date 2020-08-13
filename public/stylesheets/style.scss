@@ -53,13 +53,9 @@ body {
   margin-top: 150px;
 }
 
-.user-details {
+.user-info {
   color: #0c6785;
   font-weight: lighter;
-}
-
-.user-details > p > span {
-  color: pink;
 }
 
 #navbar {
@@ -363,17 +359,39 @@ font-size: 0.8rem;
   margin-left: 10px;
 }
 
-.whatsapp-box {
-  background-color: #0c6785;
+.whatsapp-button {
+  background-color: #25d366;
   color: white;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 5px;
+  height: 28px;
+  width: 76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.whatsapp-button > a {
+  font-size: 0.8rem;
+  color: white;
+  text-decoration: none;
+}
+
+.twitter-share-button {
+  padding: 0;
+  margin: auto;
+}
+
+.social-media-box-outer {
+  display: flex;
+  justify-content: space-between;
   width: 300px;
   margin: auto;
 }
 
-.whatsapp-box > a {
-  font-size: 1rem;
+.social-media-box {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
 }
 
 /* styles for '...' */ 
@@ -418,8 +436,16 @@ font-size: 0.8rem;
   background: white;
 }
 
+.pic-upload-box > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+}
 
-
+.error-message {
+  color: #0c6785;
+}
 
 
 /*# sourceMappingURL=style.css.map */ 

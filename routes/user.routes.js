@@ -2,6 +2,9 @@ const express = require('express');
 const router  = express.Router();
 const bcryptjs = require('bcryptjs');
 const axios = require('axios')
+const multer = require('multer');
+const upload = multer({dest: __dirname + '/uploads/images'});
+
 const BookModel = require('../models/Books.model');
 const MovieModel = require('../models/Movies.model')
 const CountryModel = require('../models/Country.model')
@@ -12,7 +15,6 @@ const UserModel = require('../models/User.model')
 
 //NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
-  console.log('inside new country')
   res.redirect(`/countries/${req.body.countrychoice}`)
 })
 
@@ -24,7 +26,6 @@ router.get('/profile', (req, res) => {
 
     if (user.countriesToDo.length > 0) {
     
-    console.log('This is user countries', user.countriesToDo)
     let myPromises =[]
     user.countriesToDo.forEach((countryName, i) => {
       if (countryName != '') {
@@ -47,14 +48,14 @@ router.get('/profile', (req, res) => {
   }
 })
 
-// router.get('/map', (req, res, next) => {
-//   if (req.session.loggedInUser){
-//     res.render('users/country-overview.hbs', {loggedInUser: req.session.loggedInUser})
-//   }
-//   else {
-//     res.redirect('/signin')
-//   }
-// });
+router.get('/map', (req, res, next) => {
+  if (req.session.loggedInUser){
+    res.render('users/country-overview.hbs', {loggedInUser: req.session.loggedInUser})
+  }
+  else {
+    res.redirect('/signin')
+  }
+});
 
 router.get('/new-country', (req, res, next) => {
   if (req.session.loggedInUser){
@@ -117,6 +118,11 @@ router.get('/countries/:country', (req, res) => {
       })  
     })
     .catch((err) => {
+      let errorMessage = 'Please pick an actual country.'
+      CountryModel.find({})
+     .then((countries) => {
+      res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser, errorMessage})
+      })
       console.log(`google is difficult`, err)
     })
 })
@@ -162,5 +168,14 @@ router.get('/countries/:country/add', (req, res) => {
 router.post('/profile', (req, res) => {
   res.render('users/edit-profile', {loggedInUser: req.session.loggedInUser})
 })
+
+
+router.post('/upload', upload.single('photo'), (req, res) => {
+  if(req.file) {
+      res.json(req.file);
+  }
+  else throw 'error';
+});
+
 
 module.exports = router;
