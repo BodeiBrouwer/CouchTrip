@@ -56,6 +56,24 @@ body {
 .user-info {
   color: #0c6785;
   font-weight: lighter;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 200px;
+}
+
+.edit-profile {
+  background-color: #0c6785;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 100px;
+  margin: 10px auto;
+  padding: 2.5px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
 #navbar {

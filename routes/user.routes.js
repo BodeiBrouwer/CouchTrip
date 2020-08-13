@@ -3,12 +3,32 @@ const router  = express.Router();
 const bcryptjs = require('bcryptjs');
 const axios = require('axios')
 const multer = require('multer');
-const upload = multer({dest: __dirname + '/uploads/images'});
 
 const BookModel = require('../models/Books.model');
 const MovieModel = require('../models/Movies.model')
 const CountryModel = require('../models/Country.model')
 const UserModel = require('../models/User.model')
+
+
+// include CLOUDINARY:
+const uploader = require('../config/cloudinary.config.js');
+router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
+     console.log('file is: ', req.file)
+    if (!req.file) {
+      next(new Error('No file uploaded!'));
+      return;
+    }
+    let loggedInUser = req.session.loggedInUser;
+    UserModel.findByIdAndUpdate(loggedInUser._id, {$set: {profilePic: }})
+
+    
+    res.render('/profile', loggedInUser)
+    // res.json({ secure_url: req.file.path });
+})
+
+
+
+
 
 
 //NEW COUNTRY ROUTE
@@ -83,25 +103,35 @@ router.get('/countries/:country', (req, res) => {
              let myBooks = []
              Promise.all(myPromises)
              .then((results) => {
-                results.forEach((result) => {
-                  let bookInfo = result.data.items[0]
+                results.forEach((result, i) => {
+                  if (result.data.items){
+                    let bookInfo = result.data.items[0]
                 
-                  bookInfo.description = bookInfo.volumeInfo.description;
-                  if (bookInfo.volumeInfo.imageLinks.thumbnail === undefined) {
-                    bookInfo.img = 'shorturl.at/lFX69'
+                    bookInfo.description = bookInfo.volumeInfo.description;
+                    if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined) {
+                      bookInfo.img = 'shorturl.at/lFX69'
+                    }
+                    else {
+                      bookInfo.img = bookInfo.volumeInfo.imageLinks.thumbnail;
+                    }
+                    if (bookInfo.volumeInfo.averageRating === undefined) {
+                      bookInfo.rating = "no rating"
+                    }
+                    else {
+                      bookInfo.rating = bookInfo.volumeInfo.averageRating;
+                    }
+                    bookInfo.author = bookInfo.volumeInfo.authors
+                    bookInfo.title = bookInfo.volumeInfo.title
+                    myBooks.push(bookInfo)
                   }
                   else {
-                    bookInfo.img = bookInfo.volumeInfo.imageLinks.thumbnail;
+                    myBooks.push({
+                      title: books[i].title,
+                      author: books[i].author,
+                      img: 'shorturl.at/lFX69',
+                      rating: 'no rating',
+                    })
                   }
-                  if (bookInfo.volumeInfo.averageRating === undefined) {
-                    bookInfo.rating = "no rating"
-                  }
-                  else {
-                    bookInfo.rating = bookInfo.volumeInfo.averageRating;
-                  }
-                  bookInfo.author = bookInfo.volumeInfo.authors
-                  bookInfo.title = bookInfo.volumeInfo.title
-                  myBooks.push(bookInfo)
                 })
               res.render('users/country-details.hbs', {country, movies, books: myBooks, loggedInUser: req.session.loggedInUser})
              })
@@ -187,12 +217,7 @@ else {
 });
 
 
-router.post('/upload', upload.single('photo'), (req, res) => {
-  if(req.file) {
-      res.json(req.file);
-  }
-  else throw 'error';
-});
+
 
 
 module.exports = router;
