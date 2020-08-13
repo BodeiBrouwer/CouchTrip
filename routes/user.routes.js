@@ -19,6 +19,15 @@ router.post('/new-country', (req, res, next) => {
 
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
+    res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
+  }
+  else {
+    res.redirect('/signin')
+  }
+})
+
+router.get('/my-trips', (req, res, next) => {
+  if (req.session.loggedInUser){
 
     let user = req.session.loggedInUser;
 
@@ -31,24 +40,14 @@ router.get('/profile', (req, res) => {
     })
     Promise.all(myPromises)
     .then((countriesToDo) => {
-      res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser, countriesToDo})
+      res.render('users/my.trips.hbs', {loggedInUser: req.session.loggedInUser, countriesToDo})
     })
 
     }
     else {
       let errorMessage = "You have no countries in your collection yet."
-      res.render('users/profile.hbs', {errorMessage, loggedInUser: req.session.loggedInUser})
+      res.render('users/my.trips.hbs', {errorMessage, loggedInUser: req.session.loggedInUser})
     }
-
-  }
-  else {
-    res.redirect('/signin')
-  }
-})
-
-router.get('/map', (req, res, next) => {
-  if (req.session.loggedInUser){
-    res.render('users/country-overview.hbs', {loggedInUser: req.session.loggedInUser})
   }
   else {
     res.redirect('/signin')
@@ -66,7 +65,6 @@ router.get('/new-country', (req, res, next) => {
     res.redirect('/signin')
   }
 });
-
 
 router.get('/countries/:country', (req, res) => {
   if (req.session.loggedInUser){
@@ -134,18 +132,16 @@ router.get('/countries/:country/delete', (req, res) => {
         UserModel.findById(req.session.loggedInUser._id)
         .then((user)=> {
            req.session.loggedInUser = user
-           res.redirect('/profile')
+           res.redirect('/my-trips')
         })
   })
 })
-
-
 
 router.get('/countries/:country/add', (req, res) => {
   UserModel.findById(req.session.loggedInUser._id)
     .then((user)=> {
       if (user.countriesToDo.includes(req.params.country)) {
-        res.redirect('/profile');
+        res.redirect('/my-trips');
       }
       else {
         UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {countriesToDo: req.params.country}})   
@@ -153,7 +149,7 @@ router.get('/countries/:country/add', (req, res) => {
             UserModel.findById(req.session.loggedInUser._id)
              .then((user)=> {
                 req.session.loggedInUser = user
-                res.redirect('/profile')
+                res.redirect('/my-trips')
              })
           })
         .catch((err) => {
@@ -163,10 +159,27 @@ router.get('/countries/:country/add', (req, res) => {
     })
 })
 
-
-router.post('/profile', (req, res) => {
+router.get('/profile/edit', (req, res) => {
   if (req.session.loggedInUser){
   res.render('users/edit-profile', {loggedInUser: req.session.loggedInUser})
+}
+else {
+  res.redirect('/signin')
+}
+});
+
+router.post('/profile/edit', (req, res) => {
+  if (req.session.loggedInUser){
+    let {username, email, favouritePlaces, favouriteBooks, favouriteMovies} = req.body
+    let userId = req.session.loggedInUser._id
+    UserModel.findByIdAndUpdate(userId, {$set: {username, email, favouritePlaces, favouriteBooks, favouriteMovies}})
+    .then(() => {
+      UserModel.findById(req.session.loggedInUser._id)
+       .then((user)=> {
+          req.session.loggedInUser = user
+          res.redirect('/profile')
+       })
+    })
 }
 else {
   res.redirect('/signin')

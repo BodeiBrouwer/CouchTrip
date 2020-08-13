@@ -10,13 +10,16 @@
   <label for="signup-email">Email</label>
   <input id="edit-email" name="email" type="email" value={{loggedInUser.email}}>
 
-  <label for="signup-password">Password</label>
-  <input id="edit-password" name="password" type="password">
+  <label for="favouritePlaces">Favourite CouchTrips</label>
+  <input id="edit-places" name="favouritePlaces" type="text" value={{loggedInUser.favouritePlaces}}>
 
-  <label for="signup-password-repeat">Repeat password</label>
-  <input id="edit-password-repeat" type="password">
+  <label for="favouriteBooks">Favourite books</label>
+  <input id="edit-books" name="favouriteBooks" type="text" value={{loggedInUser.favouriteBooks}}>
+
+  <label for="favouriteMovies">Favourite movies</label>
+  <input id="edit-movies" name="favouriteMovies" type="text" value={{loggedInUser.favouriteMovies}}>
   
-  <button class="btn edit-profile-btn" type="submit">Edit profile</button>
+  <button class="btn edit-profile-btn" type="submit">Save changes</button>
 </form>
 
 {{#if errorMessage}}

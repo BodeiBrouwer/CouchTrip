@@ -16,7 +16,10 @@ const userSchema = new Schema({
       minlength: 6
     },
     countriesVisited: Array,
-    countriesToDo: Array
+    countriesToDo: Array,
+    favouritePlaces: Array,
+    favouriteBooks: Array,
+    favouriteMovies: Array
   },
   {
     timestamps: true
