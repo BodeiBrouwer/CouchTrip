@@ -45,6 +45,9 @@ body {
 .user-screen {
   margin-top: 150px; }
 
+.user-screen > h1 {
+  padding-top: 10px; }
+
 .user-info {
   color: #0c6785;
   font-weight: lighter;
@@ -100,11 +103,37 @@ body {
 .menu-span {
   display: none; }
 
+#myVideo {
+  display: none; }
+
 @media (min-width: 600px) {
   .menu-span {
     display: inline-block; }
   .fas {
     display: none; } }
+
+@media (min-width: 1000px) {
+  #myVideo {
+    display: flex;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1; }
+  .new-country-screen {
+    background-color: pink;
+    width: 500px;
+    margin: 250px auto;
+    padding: 10px;
+    border-radius: 10px; }
+  .new-country-screen > h3 {
+    color: #0c6785; }
+  .new-country-screen > form > input {
+    border-bottom: 2px solid #0c6785; } }
+
+.new-country-screen {
+  margin-top: 200px; }
 
 p {
   font-size: 0.9rem; }

@@ -1,5 +1,11 @@
 <div class="user-screen">
 
+<video autoplay muted loop id="myVideo">
+  <source src="/images/travelvid.mp4" type="video/mp4">
+</video>
+
+  <div class ="new-country-screen">
+
 <h3>Where do you want to travel?</h3>
 
 <form class="form search-country-form" action="/new-country" method="POST">
@@ -15,9 +21,14 @@
 
   <button class="btn search-country-btn" type="submit">Take me there</button>
 </form>
+<form class="form random-country-form" action="/new-country/random" method="POST">
+  <button class="btn search-country-btn" type="submit">Surprise me</button>
+</form>
 
 {{#if errorMessage}}
   <p class="error-message">{{errorMessage}}</p>
 {{/if}}
+
+</div>
 
 </div>

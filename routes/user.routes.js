@@ -26,11 +26,30 @@ router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
     // res.json({ secure_url: req.file.path });
 })
 
-//NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
-  res.redirect(`/countries/${req.body.countrychoice}`)
+  if (req.body.countrychoice === '') {
+    let errorMessage = 'Please pick a country.'
+      CountryModel.find()
+     .then((countries) => {
+      res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser, errorMessage})
+      })
+  }
+  else {
+    res.redirect(`/countries/${req.body.countrychoice}`)
+  }
 })
 
+
+router.post('/new-country/random', (req, res, next) => {
+  let randomNum= Math.floor(Math.random() * Math.floor(197));
+  console.log(randomNum);
+  CountryModel.find()
+    .then((allCountries) => {
+      let country = allCountries[randomNum].name;
+      console.log(country);
+      res.redirect(`/countries/${country}`)
+    })
+})
 
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
@@ -104,11 +123,11 @@ router.get('/countries/:country', (req, res) => {
              .then((results) => {
                 results.forEach((result, i) => {
                   if (result.data.items){
-                    let bookInfo = result.data.items[0]
-                
+                    let bookInfo = result.data.items[0] 
                     bookInfo.description = bookInfo.volumeInfo.description;
-                    if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined) {
-                      bookInfo.img = 'shorturl.at/lFX69'
+
+                    if (bookInfo.volumeInfo.imageLinks.thumbnail == undefined || null || '') {
+                      bookInfo.img = 'https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg'
                     }
                     else {
                       bookInfo.img = bookInfo.volumeInfo.imageLinks.thumbnail;
@@ -127,7 +146,7 @@ router.get('/countries/:country', (req, res) => {
                     myBooks.push({
                       title: books[i].title,
                       author: books[i].author,
-                      img: 'shorturl.at/lFX69',
+                      img: 'https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg',
                       rating: 'no rating',
                     })
                   }
@@ -143,7 +162,7 @@ router.get('/countries/:country', (req, res) => {
     })
     .catch((err) => {
       let errorMessage = 'Please pick an actual country.'
-      CountryModel.find({})
+      CountryModel.find()
      .then((countries) => {
       res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser, errorMessage})
       })
