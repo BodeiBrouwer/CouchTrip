@@ -27,6 +27,10 @@
     <p>{{this.description}}</p>
     <p class="rating">Rating on IMDb: {{this.rating}}</p>
   </div>
+
+  <a href="/movies/{{this.title}}/fave">
+     <button type="submit" class="btn btn-primary">Add to favourites</button>
+  </a>
 {{/each}}
 
 {{#each books}}
@@ -38,6 +42,10 @@
     <p class="block-with-text">{{this.description}}</p>
     <p class="rating">Rating on Google Books: {{this.rating}}</p>
   </div>
+
+  <a href="/books/{{this.title}}/fave">
+     <button type="submit" class="btn btn-primary">Add to favourites</button>
+  </a>
 {{/each}}
 
 </div>

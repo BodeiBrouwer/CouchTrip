@@ -22,7 +22,6 @@ router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
       .then((foundUser) => {
         res.redirect('/profile')
       })
-    // res.json({ secure_url: req.file.path });
 })
 
 router.post('/new-country', (req, res, next) => {
@@ -237,8 +236,70 @@ else {
 }
 });
 
+router.get('/countries/:country/fave', (req, res) => {
+  UserModel.findById(req.session.loggedInUser._id)
+    .then((user)=> {
+      if (user.favouritePlaces.includes(req.params.country)) {
+        res.redirect('/profile');
+      }
+      else {
+        UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {favouritePlaces: req.params.country}})   
+        .then(() => {
+            UserModel.findById(req.session.loggedInUser._id)
+             .then((user)=> {
+                req.session.loggedInUser = user
+                res.redirect('/profile')
+             })
+          })
+        .catch((err) => {
+          console.log('something is off', err)
+        })
+      }
+    })
+})
 
+router.get('/movies/:movie/fave', (req, res) => {
+  UserModel.findById(req.session.loggedInUser._id)
+    .then((user)=> {
+      if (user.favouriteMovies.includes(req.params.movie)) {
+        res.redirect('/profile');
+      }
+      else {
+        UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {favouriteMovies: req.params.movie}})   
+        .then(() => {
+            UserModel.findById(req.session.loggedInUser._id)
+             .then((user)=> {
+                req.session.loggedInUser = user
+                res.redirect('/profile')
+             })
+          })
+        .catch((err) => {
+          console.log('something is off', err)
+        })
+      }
+    })
+})
 
-
+router.get('/books/:book/fave', (req, res) => {
+  UserModel.findById(req.session.loggedInUser._id)
+    .then((user)=> {
+      if (user.favouriteBooks.includes(req.params.book)) {
+        res.redirect('/profile');
+      }
+      else {
+        UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {favouriteBooks: req.params.book}})   
+        .then(() => {
+            UserModel.findById(req.session.loggedInUser._id)
+             .then((user)=> {
+                req.session.loggedInUser = user
+                res.redirect('/profile')
+             })
+          })
+        .catch((err) => {
+          console.log('something is off', err)
+        })
+      }
+    })
+})
 
 module.exports = router;
