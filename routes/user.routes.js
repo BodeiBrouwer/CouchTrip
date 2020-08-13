@@ -157,6 +157,7 @@ router.get('/countries/:country', (req, res) => {
               res.render('users/country-details.hbs', {country, movies, books: myBooks, loggedInUser: req.session.loggedInUser})
              })
              .catch((err) => {
+              res.render('users/country-details.hbs', {country, movies, loggedInUser: req.session.loggedInUser})
              })
               
           }) 
