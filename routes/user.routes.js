@@ -97,7 +97,7 @@ router.get('/my-trips', (req, res, next) => {
 
 router.get('/new-country', (req, res, next) => {
   if (req.session.loggedInUser){
-    CountryModel.find({})
+    CountryModel.find()
      .then((countries) => {
       res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser})
      })
