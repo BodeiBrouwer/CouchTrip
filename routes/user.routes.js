@@ -34,6 +34,17 @@ router.post('/new-country', (req, res, next) => {
   res.redirect(`/countries/${req.body.countrychoice}`)
 })
 
+router.post('/new-country/random', (req, res, next) => {
+  let randomNum= Math.floor(Math.random() * Math.floor(197));
+  console.log(randomNum);
+  CountryModel.find()
+    .then((allCountries) => {
+      let country = allCountries[randomNum].name;
+      console.log(country);
+      res.redirect(`/countries/${country}`)
+    })
+})
+
 
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
