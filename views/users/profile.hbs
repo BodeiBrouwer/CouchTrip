@@ -4,7 +4,7 @@
 
 <div class="user-info">
   {{#if loggedInUser.profilePic}}
-     <img class="profile-pic" src="https://images.unsplash.com/photo-1527150602-a98f7a6f2746?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Profile pic">
+     <img class="profile-pic" src="{{loggedInUser.profilePic}}" alt="Profile pic">
   {{else}}
       <img class="profile-pic" src="https://images.unsplash.com/photo-1527150602-a98f7a6f2746?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Profile pic">
   {{/if}}
