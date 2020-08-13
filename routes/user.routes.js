@@ -15,8 +15,7 @@ const uploader = require('../configs/cloudinary.config.js');
 
 router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
     if (!req.file) {
-      next(new Error('No file uploaded!'));
-      return;
+      res.redirect('/profile/edit')
     }
     let user = req.session.loggedInUser;
     UserModel.findByIdAndUpdate(user._id, {$set: {profilePic: req.file.path}})
