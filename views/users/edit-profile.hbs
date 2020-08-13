@@ -5,19 +5,19 @@
 <form class="form edit-user-form" action="/profile/edit" method="POST">
 
   <label for="username">Name</label>
-  <input id="edit-name" name="username" type="text" value={{loggedInUser.username}}>
+  <input id="edit-name" name="username" type="text" value="{{loggedInUser.username}}">
 
   <label for="signup-email">Email</label>
-  <input id="edit-email" name="email" type="email" value={{loggedInUser.email}}>
+  <input id="edit-email" name="email" type="email" value="{{loggedInUser.email}}">
 
   <label for="favouritePlaces">Favourite CouchTrips</label>
-  <input id="edit-places" name="favouritePlaces" type="text" value={{loggedInUser.favouritePlaces}}>
+  <input id="edit-places" name="favouritePlaces" type="text" value="{{loggedInUser.favouritePlaces}}"">
 
   <label for="favouriteBooks">Favourite books</label>
-  <input id="edit-books" name="favouriteBooks" type="text" value={{loggedInUser.favouriteBooks}}>
+  <input id="edit-books" name="favouriteBooks" type="text" value="{{loggedInUser.favouriteBooks}}">
 
   <label for="favouriteMovies">Favourite movies</label>
-  <input id="edit-movies" name="favouriteMovies" type="text" value={{loggedInUser.favouriteMovies}}>
+  <input id="edit-movies" name="favouriteMovies" type="text" value="{{loggedInUser.favouriteMovies}}">
   
   <button class="btn edit-profile-btn" type="submit">Save changes</button>
 </form>
