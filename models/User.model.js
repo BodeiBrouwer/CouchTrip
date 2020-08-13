@@ -16,7 +16,8 @@ const userSchema = new Schema({
       minlength: 6
     },
     countriesVisited: Array,
-    countriesToDo: Array
+    countriesToDo: Array,
+    profilePic: String
   },
   {
     timestamps: true
