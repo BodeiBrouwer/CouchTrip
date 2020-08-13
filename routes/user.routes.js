@@ -29,10 +29,19 @@ router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
 
 
 
-//NEW COUNTRY ROUTE
 router.post('/new-country', (req, res, next) => {
-  res.redirect(`/countries/${req.body.countrychoice}`)
+  if (req.body.countrychoice === '') {
+    let errorMessage = 'Please pick a country.'
+      CountryModel.find()
+     .then((countries) => {
+      res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser, errorMessage})
+      })
+  }
+  else {
+    res.redirect(`/countries/${req.body.countrychoice}`)
+  }
 })
+
 
 router.post('/new-country/random', (req, res, next) => {
   let randomNum= Math.floor(Math.random() * Math.floor(197));
@@ -157,7 +166,7 @@ router.get('/countries/:country', (req, res) => {
     })
     .catch((err) => {
       let errorMessage = 'Please pick an actual country.'
-      CountryModel.find({})
+      CountryModel.find()
      .then((countries) => {
       res.render('users/create-new.hbs', {countries, loggedInUser: req.session.loggedInUser, errorMessage})
       })
