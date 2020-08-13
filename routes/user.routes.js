@@ -153,7 +153,10 @@ router.get('/countries/:country', (req, res) => {
               res.render('users/country-details.hbs', {country, movies, books: myBooks, loggedInUser: req.session.loggedInUser})
              })
              .catch((err) => {
-              res.render('users/country-details.hbs', {country, movies, loggedInUser: req.session.loggedInUser})
+              books.forEach(book => {
+                book.img = 'https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg';
+              })
+              res.render('users/country-details.hbs', {country, movies, books: books, loggedInUser: req.session.loggedInUser})
              })
               
           }) 
