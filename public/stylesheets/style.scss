@@ -462,8 +462,37 @@ font-size: 0.8rem;
   margin: 5px;
 }
 
-.form-control-file {
+.pic-upload-box > h2 {
+  color: white;
+}
+
+
+.form-control-file::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.form-control-file::before {
+  content: 'Select picture';
+
+  background: #0c6785;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 100px;
+  margin: 10px auto;
+  padding: 2.5px 5px;
+  font-weight: bold;
+  outline: none;
   
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.form-control-file:hover::before {
+  border: none;
+}
+.form-control-file:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
 .upload-btn {

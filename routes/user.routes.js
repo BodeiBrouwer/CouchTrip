@@ -14,14 +14,13 @@ const UserModel = require('../models/User.model')
 const uploader = require('../configs/cloudinary.config.js');
 
 router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
-     console.log('file is: ', req.file)
     if (!req.file) {
       next(new Error('No file uploaded!'));
       return;
     }
     let user = req.session.loggedInUser;
     UserModel.findByIdAndUpdate(user._id, {$set: {profilePic: req.file.path}})
-      .then((loggedInUser) => {
+      .then((foundUser) => {
         res.redirect('/profile')
       })
     // res.json({ secure_url: req.file.path });
@@ -38,7 +37,11 @@ router.post('/new-country', (req, res, next) => {
 
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
-    res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
+    UserModel.findById(req.session.loggedInUser._id)
+      .then((user) => {
+        req.session.loggedInUser = user;
+        res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
+      })
   }
   else {
     res.redirect('/signin')
