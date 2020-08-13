@@ -1,25 +1,17 @@
 <div class="user-screen">
 
-<h3>{{loggedInUser.username}}'s World</h3>
+<h3>Profile</h3>
 
-{{#if errorMessage}}
-  <p>{{errorMessage}}</p>
-{{/if}}
-
-
-<div id="profile-country-collection">
-
-{{#each countriesToDo}}
-  <div class="country-info">
-    <h4>{{this.name}}</h4>
-    <img class="country-pic" src="https://source.unsplash.com/random/?{{this.name}}" alt="{{this.name}}">
-    <a href="/countries/{{this.name}}">Discover more</a>
-    <a href="/countries/{{this.name}}/delete">
-     <button type="submit" class="btn btn-primary">Delete from my trips</button>
-    </a>  
-  </div>
-{{/each}}
-
+<div class="user-info">
+  <p>Name: {{loggedInUser.username}}</p>
+  <p>Email: {{loggedInUser.email}}</p>
+  <p>My favourite CouchTrips: {{loggedInUser.favouritePlaces}}</p>
+  <p>My favourite books: {{loggedInUser.favouriteBooks}}</p>
+  <p>My favourite movies: {{loggedInUser.favouriteMovies}}</p>
 </div>
+
+<a href="/profile/edit">
+<button class="btn edit-profile-btn" type="submit">Edit profile</button>
+</a>
 
 </div>

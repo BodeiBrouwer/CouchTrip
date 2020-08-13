@@ -9,9 +9,10 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/couchtrip'
+const MONDOGB_URL = process.env.MONGODB_URI || 'mongodb://localhost/couchtrip'
+
 mongoose
-  .connect(`${MONGODB_URI}`, {useNewUrlParser: true})
+  .connect(`${MONDOGB_URL}`, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -61,6 +62,11 @@ app.use(session({
 
 // default value for title local
 app.locals.title = 'CouchTrip';
+
+app.use(function(req, res, next) {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+});
 
 const index = require('./routes/index');
 app.use('/', index);

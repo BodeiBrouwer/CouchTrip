@@ -38,6 +38,15 @@ router.post('/new-country', (req, res, next) => {
 
 router.get('/profile', (req, res) => {
   if (req.session.loggedInUser){
+    res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser})
+  }
+  else {
+    res.redirect('/signin')
+  }
+})
+
+router.get('/my-trips', (req, res, next) => {
+  if (req.session.loggedInUser){
 
     let user = req.session.loggedInUser;
 
@@ -50,24 +59,14 @@ router.get('/profile', (req, res) => {
     })
     Promise.all(myPromises)
     .then((countriesToDo) => {
-      res.render('users/profile.hbs', {loggedInUser: req.session.loggedInUser, countriesToDo})
+      res.render('users/my.trips.hbs', {loggedInUser: req.session.loggedInUser, countriesToDo})
     })
 
     }
     else {
       let errorMessage = "You have no countries in your collection yet."
-      res.render('users/profile.hbs', {errorMessage, loggedInUser: req.session.loggedInUser})
+      res.render('users/my.trips.hbs', {errorMessage, loggedInUser: req.session.loggedInUser})
     }
-
-  }
-  else {
-    res.redirect('/signin')
-  }
-})
-
-router.get('/map', (req, res, next) => {
-  if (req.session.loggedInUser){
-    res.render('users/country-overview.hbs', {loggedInUser: req.session.loggedInUser})
   }
   else {
     res.redirect('/signin')
@@ -86,8 +85,8 @@ router.get('/new-country', (req, res, next) => {
   }
 });
 
-
 router.get('/countries/:country', (req, res) => {
+  if (req.session.loggedInUser){
    let countryname = req.params.country;
     CountryModel.findOne({name:countryname})
       .then((country) => {
@@ -97,7 +96,6 @@ router.get('/countries/:country', (req, res) => {
           MovieModel.find({country:country.name})
             .then((movies) => {
               let myPromises = []
-              console.log('inside countries route')
               books.forEach((book, i) => {
                 myPromises[i] = axios.get(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(book.title)}+inauthor:${encodeURI(book.author)}&key=${process.env.GOOGLE_API_KEY}`)
              })
@@ -105,7 +103,6 @@ router.get('/countries/:country', (req, res) => {
              Promise.all(myPromises)
              .then((results) => {
                 results.forEach((result, i) => {
-                  console.log('BlahBlahBlah', result.data)
                   if (result.data.items){
                     let bookInfo = result.data.items[0]
                 
@@ -138,7 +135,6 @@ router.get('/countries/:country', (req, res) => {
               res.render('users/country-details.hbs', {country, movies, books: myBooks, loggedInUser: req.session.loggedInUser})
              })
              .catch((err) => {
-              console.log('Error is', err)
              })
               
           }) 
@@ -153,6 +149,10 @@ router.get('/countries/:country', (req, res) => {
       })
       console.log(`google is difficult`, err)
     })
+  }
+  else {
+    res.redirect('/signin')
+  }
 })
 
 router.get('/countries/:country/delete', (req, res) => {
@@ -161,18 +161,16 @@ router.get('/countries/:country/delete', (req, res) => {
         UserModel.findById(req.session.loggedInUser._id)
         .then((user)=> {
            req.session.loggedInUser = user
-           res.redirect('/profile')
+           res.redirect('/my-trips')
         })
   })
 })
-
-
 
 router.get('/countries/:country/add', (req, res) => {
   UserModel.findById(req.session.loggedInUser._id)
     .then((user)=> {
       if (user.countriesToDo.includes(req.params.country)) {
-        res.redirect('/profile');
+        res.redirect('/my-trips');
       }
       else {
         UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {countriesToDo: req.params.country}})   
@@ -180,7 +178,7 @@ router.get('/countries/:country/add', (req, res) => {
             UserModel.findById(req.session.loggedInUser._id)
              .then((user)=> {
                 req.session.loggedInUser = user
-                res.redirect('/profile')
+                res.redirect('/my-trips')
              })
           })
         .catch((err) => {
@@ -190,12 +188,32 @@ router.get('/countries/:country/add', (req, res) => {
     })
 })
 
-
-
-
-router.post('/profile', (req, res) => {
+router.get('/profile/edit', (req, res) => {
+  if (req.session.loggedInUser){
   res.render('users/edit-profile', {loggedInUser: req.session.loggedInUser})
-})
+}
+else {
+  res.redirect('/signin')
+}
+});
+
+router.post('/profile/edit', (req, res) => {
+  if (req.session.loggedInUser){
+    let {username, email, favouritePlaces, favouriteBooks, favouriteMovies} = req.body
+    let userId = req.session.loggedInUser._id
+    UserModel.findByIdAndUpdate(userId, {$set: {username, email, favouritePlaces, favouriteBooks, favouriteMovies}})
+    .then(() => {
+      UserModel.findById(req.session.loggedInUser._id)
+       .then((user)=> {
+          req.session.loggedInUser = user
+          res.redirect('/profile')
+       })
+    })
+}
+else {
+  res.redirect('/signin')
+}
+});
 
 
 

@@ -8,7 +8,6 @@ const axios = require('axios');
 
 const MovieModel = require('../models/Movies.model')
 
-
 let movies = [
   {title: 'Osama',
   country: 'Afghanistan',
@@ -1251,7 +1250,6 @@ let movies = [
   country: 'Peru',
   imdb: 'tt1368491'
   },
-
   {title: 'The Master',
   country: 'Philippines',
   imdb: 'tt1560747'
@@ -1790,51 +1788,64 @@ let movies = [
   },
 ]
 
+function seedMovies(){
+  movies.forEach((movie) => {
+    axios.get(`http://www.omdbapi.com/?i=${movie.imdb}&apikey=${process.env.OMDBKEY}`)
+    .then((result) => {
+      movie.description = result.data.Plot;
+      if (result.data.Poster === 'N/A') {
+        movie.img = 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+      }
+      else {
+        movie.img = result.data.Poster;
+      }
+      if (result.data.Ratings[0] === undefined) {
+        movie.rating = 'No rating'
+      }
+      else {
+        movie.rating = result.data.Ratings[0].Value;
+      }
+      MovieModel.create(movie)
+      })
+      .then(() => {
+        console.log('inserted!')
+      })
+      .catch((err) => {
+        console.log(`DB error:`, movie.title)
+      })
+      .catch((err) => {
+        console.log(`API ERROR`, movie.title)
+      })
+    })
 
-movies.forEach((movie) => {
-  axios.get(`http://www.omdbapi.com/?i=${movie.imdb}&apikey=${process.env.OMDBKEY}`)
-  .then((result) => {
-    movie.description = result.data.Plot;
-    if (result.data.Poster === 'N/A') {
-      movie.img = 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+}
+
+function seedCountries(){
+  const CountryModel = require('../models/Country.model')
+
+  let countries = [];
+  let movie1;
+  let movie2;
+  
+  movies.forEach(movie => {
+    if (movies.indexOf(movie)%2 === 0) {
+      movie1 = movie.title;
     }
     else {
-      movie.img = result.data.Poster;
+      movie2 = movie.title
+      countries.push({name: movie.country, movies: [movie1, movie2]});
     }
-    if (result.data.Ratings[0] === undefined) {
-      movie.rating = 'No rating'
-    }
-    else {
-      movie.rating = result.data.Ratings[0].Value;
-    }
-    MovieModel.create(movie)
-    })
-    .then(() => {
-      console.log('inserted!')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
   })
+  
+  CountryModel.create(countries);
+}
 
-
-const CountryModel = require('../models/Country.model')
-
-let countries = [];
-let movie1;
-let movie2;
-
-movies.forEach(movie => {
-  if (movies.indexOf(movie)%2 === 0) {
-    movie1 = movie.title;
-  }
-  else {
-    movie2 = movie.title
-    countries.push({name: movie.country, movies: [movie1, movie2]});
-  }
-})
-
-CountryModel.create(countries);
+mongoose
+  .connect(`${MONGODB_URI}`, {useNewUrlParser: true})
+  .then(x => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+    seedMovies()
+  })
+  .catch(err => {
+    console.error('Error connecting to mongo', err)
+  });
