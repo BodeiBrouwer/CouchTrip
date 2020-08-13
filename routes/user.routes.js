@@ -11,24 +11,20 @@ const UserModel = require('../models/User.model')
 
 
 // include CLOUDINARY:
-const uploader = require('../config/cloudinary.config.js');
-router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
-     console.log('file is: ', req.file)
-    if (!req.file) {
-      next(new Error('No file uploaded!'));
-      return;
-    }
-    let loggedInUser = req.session.loggedInUser;
-    UserModel.findByIdAndUpdate(loggedInUser._id, {$set: {profilePic: }})
+// const uploader = require('../config/cloudinary.config.js');
+// router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
+//      console.log('file is: ', req.file)
+//     if (!req.file) {
+//       next(new Error('No file uploaded!'));
+//       return;
+//     }
+//     let loggedInUser = req.session.loggedInUser;
+//     UserModel.findByIdAndUpdate(loggedInUser._id, {$set: {profilePic }})
 
     
-    res.render('/profile', loggedInUser)
-    // res.json({ secure_url: req.file.path });
-})
-
-
-
-
+//     res.render('/profile', loggedInUser)
+//     // res.json({ secure_url: req.file.path });
+// })
 
 
 //NEW COUNTRY ROUTE
