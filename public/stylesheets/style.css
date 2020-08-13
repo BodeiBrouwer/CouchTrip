@@ -61,7 +61,8 @@ body {
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  z-index: 200; }
 
 .nav-list {
   list-style-type: none;
@@ -331,13 +332,13 @@ h5 {
 .social-media-box-outer {
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: 340px;
   margin: auto; }
 
 .social-media-box {
   display: flex;
   justify-content: space-between;
-  width: 300px; }
+  width: 340px; }
 
 /* styles for '...' */
 .block-with-text {
