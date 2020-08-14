@@ -1,64 +1,122 @@
-<div class="user-screen">
+<div
+  class="user-screen">
 
-  <h3>Edit profile</h3>
+  <h3>Edit profile
+  </h3>
 
-  <form class="form edit-user-form" action="/profile/edit" method="POST">
+  <form
+    class="form edit-user-form"
+    action="/profile/edit"
+    method="POST">
 
-    <label for="username">Name</label>                     
-    <input id="edit-name" name="username" type="text" value="{{loggedInUser.username}}">
+    <label
+      for="username">Name</label>
+    <input
+      id="edit-name"
+      name="username"
+      type="text"
+      value="{{loggedInUser.username}}">
 
-    <label for="signup-email">Email</label>
-    <input id="edit-email" name="email" type="email" value="{{loggedInUser.email}}">
+    <label
+      for="signup-email">Email</label>
+    <input
+      id="edit-email"
+      name="email"
+      type="email"
+      value="{{loggedInUser.email}}">
 
-    <button class="btn edit-profile-btn" type="submit">Save changes</button>
+    <button
+      class="btn edit-profile-btn"
+      type="submit">Save
+      changes</button>
 
 
-    <label for="favouritePlaces">Favourite CouchTrips</label>
+    <label
+      for="favouritePlaces">Favourite
+      CouchTrips</label>
 
-    {{#each loggedInUser.favouritePlaces}}                                              ]
-      s \                                                      
-    <div class="fav-box">
-      <p>{{this}}</p>
-      <a href="/countries/{{this}}/unfave">
-        <input type="button" class="btn btn-primary" value="-">
+    {{#each loggedInUser.favouritePlaces}}
+    <div
+      class="fav-box">
+      <p>{{this}}
+      </p>
+      <a
+        href="/countries/{{this}}/unfave">
+        <input
+          type="button"
+          class="btn btn-primary"
+          value="-">
       </a>
     </div>
     {{/each}}
-
 
     <label for="favouriteBooks">Favourite books</label>
 
+    <label
+      for="favouriteBooks">Favourite
+      books</label>
     {{#each loggedInUser.favouriteBooks}}
-    <div class="fav-box"></div>
-    <p> {{this}}</p>
-    <a href="/books/{{this}}/unfave">
-      <input type="button" class="btn btn-primary" value="-">
-    </a>
-    {{/each}}
-
-
-    <label for="favouriteMovies">Favourite movies</label>
-
-    {{#each loggedInUser.favouriteMovies}}
-    <div class="fav-box">
-      <p> {{this}}</p>
-      <a href="/movies/{{this}}/unfave">
-        <input type="button" class="btn btn-primary" value="-">
-      </a>
+    <div
+      class="fav-box">
     </div>
-    {{/each}}
+    <p> {{this}}</p>
+    <a
+      href="/books/{{this}}/unfave">
+      <input
+        type="button"
+        class="btn btn-primary"
+        value="-">
+    </a>
+</div>
+{{/each}}
 
+
+<label
+  for="favouriteMovies">Favourite
+  movies</label>
+
+{{#each loggedInUser.favouriteMovies}}
+<div
+  class="fav-box">
+  <p> {{this}}</p>
+  <a
+    href="/movies/{{this}}/unfave">
+    <input
+      type="button"
+      class="btn btn-primary"
+      value="-">
+  </a>
+</div>
+{{/each}}
+
+</form>
+
+{{#if errorMessage}}
+<div class="error">
+  {{errorMessage}}
+</div>
+{{/if}}
+
+
+<div
+  class="pic-upload-box">
+  <h2>Upload new pic
+  </h2>
+  <form
+    class="upload-form"
+    action="/upload"
+    method="post"
+    enctype="multipart/form-data">
+    <input
+      class="form-control-file"
+      type="file"
+      accept="image/*"
+      name="imageUrl">
+    <input
+      class="btn upload-btn"
+      type="submit"
+      value="Upload">
   </form>
-
-  {{#if errorMessage}}
-  <div class="error">{{errorMessage}}</div>
-  {{/if}}
 </div>
 
-<div class="pic-upload-box">
-  <h2>Upload new pic</h2>
-  <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
-    <input class="form-control-file" type="file" accept="image/*" name="imageUrl">
-    <input class="btn upload-btn" type="submit" value="Upload">
-  </form>
 </div>
