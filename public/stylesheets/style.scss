@@ -628,6 +628,8 @@ font-size: 0.8rem;
   }
   .profile-pic {
     width: 500px;
+    max-height: 400px;
+    object-fit: contain;
   }
 
   .edit-user-form > input {

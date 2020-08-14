@@ -1,5 +1,4 @@
-<div
-  class="user-screen">
+<div class="user-screen">
 
   <h3>Edit profile
   </h3>
@@ -36,10 +35,8 @@
       CouchTrips</label>
 
     {{#each loggedInUser.favouritePlaces}}
-    <div
-      class="fav-box">
-      <p>{{this}}
-      </p>
+    <div class="fav-box">
+      <p>{{this}}</p>
       <a
         href="/countries/{{this}}/unfave">
         <input
@@ -56,7 +53,6 @@
     {{#each loggedInUser.favouriteBooks}}
     <div
       class="fav-box">
-    </div>
     <p> {{this}}</p>
     <a
       href="/books/{{this}}/unfave">
@@ -74,8 +70,7 @@
   movies</label>
 
 {{#each loggedInUser.favouriteMovies}}
-<div
-  class="fav-box">
+<div class="fav-box">
   <p> {{this}}</p>
   <a
     href="/movies/{{this}}/unfave">
