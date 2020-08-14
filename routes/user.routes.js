@@ -236,6 +236,9 @@ else {
 }
 });
 
+
+// Fave routes
+
 router.get('/countries/:country/fave', (req, res) => {
   UserModel.findById(req.session.loggedInUser._id)
     .then((user)=> {
@@ -256,6 +259,17 @@ router.get('/countries/:country/fave', (req, res) => {
         })
       }
     })
+})
+
+router.get('/countries/:country/unfave', (req, res) => {
+  UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$pull: {favouritePlaces: req.params.country}})
+      .then(() => {
+        UserModel.findById(req.session.loggedInUser._id)
+        .then((user)=> {
+           req.session.loggedInUser = user
+           res.redirect('/profile/edit')
+        })
+  })
 })
 
 router.get('/movies/:movie/fave', (req, res) => {
@@ -280,6 +294,17 @@ router.get('/movies/:movie/fave', (req, res) => {
     })
 })
 
+router.get('/movies/:movie/unfave', (req, res) => {
+  UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$pull: {favouriteMovies: req.params.movie}})
+      .then(() => {
+        UserModel.findById(req.session.loggedInUser._id)
+        .then((user)=> {
+           req.session.loggedInUser = user
+           res.redirect('/profile/edit')
+        })
+  })
+})
+
 router.get('/books/:book/fave', (req, res) => {
   UserModel.findById(req.session.loggedInUser._id)
     .then((user)=> {
@@ -300,6 +325,17 @@ router.get('/books/:book/fave', (req, res) => {
         })
       }
     })
+})
+
+router.get('/books/:book/unfave', (req, res) => {
+  UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$pull: {favouriteBooks: req.params.book}})
+      .then(() => {
+        UserModel.findById(req.session.loggedInUser._id)
+        .then((user)=> {
+           req.session.loggedInUser = user
+           res.redirect('/profile/edit')
+        })
+  })
 })
 
 module.exports = router;
