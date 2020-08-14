@@ -543,13 +543,13 @@ h5 {
   .new-country-screen > form > input {
     border-bottom: 2px solid #0c6785; }
   .user-info-textbox {
-    margin-left: calc(50vw - 400px);
-    width: 800px;
+    margin-left: calc(50vw - 300px);
+    width: 600px;
     text-align: left; }
   .profile-pic {
-    width: 800px; }
+    width: 600px; }
   .edit-user-form > input {
-    width: 800px; }
+    width: 600px; }
   .start-screen {
     display: flex;
     justify-content: space-around;
