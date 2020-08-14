@@ -275,6 +275,11 @@ h5 {
 
 .country-pic {
   width: 200px;
+  height: 200px;
+  background-position: center center;
+  object-fit: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   margin: 0 auto 10px; }
 
 .country-info {
