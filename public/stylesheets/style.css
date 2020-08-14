@@ -568,7 +568,11 @@ h5 {
     margin-top: 150px;
     margin-right: 100px; }
   .start-right h4 {
-    font-size: 1.5rem; } }
+    font-size: 1.5rem; }
+  .signup-screen {
+    display: block; }
+  .signin-screen {
+    display: block; } }
 
 /*# sourceMappingURL=style.css.map */
 
