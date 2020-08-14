@@ -385,7 +385,7 @@ font-size: 0.8rem;
   padding: 10px;
 }
 
-.media-info > h4{
+.media-info h4{
   color: white;
   font-size: 2rem;
   margin: 0 0 5px 0;
@@ -394,6 +394,19 @@ font-size: 0.8rem;
 .media-img {
   width: 200px;
   margin: 0 auto 10px;
+}
+
+.media-img-box {
+  height: 330px;
+}
+
+.media-title-box {
+  height: 80px;
+  overflow: hidden;
+}
+
+.media-description-box {
+  height: 150px;
 }
 
 .rating {
