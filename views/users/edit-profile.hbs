@@ -26,7 +26,6 @@
 
 
   <label for="favouriteBooks">Favourite books</label>
-  <div class="fav-box">
   {{#each loggedInUser.favouriteBooks}}
     <div class="fav-box"></div>
     <p> {{this}}</p>
@@ -53,7 +52,7 @@
 {{#if errorMessage}}
   <div class="error">{{errorMessage}}</div>
 {{/if}}
-</div>
+
 
 <div class="pic-upload-box">
   <h2>Upload new pic</h2>
@@ -61,4 +60,6 @@
     <input class="form-control-file" type="file" accept="image/*" name="imageUrl" >
     <input class="btn upload-btn" type="submit" value="Upload">
   </form>
+</div>
+
 </div>
