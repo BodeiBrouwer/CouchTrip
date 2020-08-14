@@ -22,35 +22,48 @@
 {{#each movies}}
   <div class="media-info">
     <h3>Movie</h3>
-    <h4>{{this.title}}</h4>
-    <img class="media-img" src="{{this.img}}" alt="{{this.title}} Poster">
+    <div class="media-title-box">
+      <h4>{{this.title}}</h4>
+    </div>
+    <div class="media-img-box">
+      <img class="media-img" src="{{this.img}}" alt="{{this.title}} Poster">
+    </div>
+    <div class="media-description-box">
     <p>{{this.description}}</p>
+    </div>
     <p class="rating">Rating on IMDb: {{this.rating}}</p>
+    <a href="/movies/{{this.title}}/fave">
+     <button type="submit" class="btn fav-btn"></button>
+  </a>
   </div>
 
-  <a href="/movies/{{this.title}}/fave">
-     <button type="submit" class="btn btn-primary">Add to favourites</button>
-  </a>
 {{/each}}
 
 {{#each books}}
   <div class="media-info">
     <h3>Book</h3>
-    <h4>{{this.title}}</h4>
-    <img class="media-img" src="{{this.img}}" alt="{{this.title}} Poster">
+    <div class="media-title-box">
+      <h4>{{this.title}}</h4>
+    </div>
+    <div class="media-img-box">
+      <img class="media-img" src="{{this.img}}" alt="{{this.title}} Poster">
+    </div>
+    <div class="media-description-box">
     <p><b>by {{this.author}}</b></p>
     <p class="block-with-text">{{this.description}}</p>
+    </div>
     <p class="rating">Rating on Google Books: {{this.rating}}</p>
+    <a href="/books/{{this.title}}/fave">
+     <button type="submit" class="btn fav-btn"></button>
+    </a>
   </div>
 
-  <a href="/books/{{this.title}}/fave">
-     <button type="submit" class="btn btn-primary">Add to favourites</button>
-  </a>
+
 {{/each}}
 
 </div>
 <a href="/countries/{{country.name}}/add">
-     <button type="submit" class="btn add-country-btn">Add to my trips</button>
+     <button type="submit" class="add-country-btn">Add to my trips</button>
 </a>
 
 </div>

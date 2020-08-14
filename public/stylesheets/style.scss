@@ -63,9 +63,12 @@ body {
   margin-bottom: 20px;
 }
 
-.profile-pic {
-  width: 200px;
+.user-info-textbox {
+  margin-left: calc(50vw - 150px);
+  width: 300px;
+  text-align: left;
 }
+
 
 .edit-profile {
   background-color: #0c6785;
@@ -124,43 +127,6 @@ body {
   display: none;
 }
 
-@media (min-width: 600px) {
-  .menu-span {
-    display: inline-block;
-  }
-  .fas {
-    display: none;
-  }
-}
-
-@media (min-width: 1000px) {
-  #myVideo {
-    display: flex;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-  }
-
-  .new-country-screen {
-    background-color: pink;
-    width: 500px;
-    margin: 250px auto;
-    padding: 10px;
-    border-radius: 10px;
-  }
-
-  .new-country-screen > h3 {
-    color: #0c6785;
-  }
-
-  .new-country-screen > form > input {
-    border-bottom: 2px solid #0c6785;
-  }
-
-}
 
 .new-country-screen {
   margin-top: 200px;
@@ -269,7 +235,13 @@ h5 {
 
 .add-country-btn {
   background-color: #0c6785;
-  padding: 5px;
+  padding: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 250px;
+  margin: 10px auto 30px;
+  font-weight: bold;
 }
 
 .btn:focus {
@@ -326,8 +298,17 @@ font-size: 0.8rem;
   flex-wrap: wrap;
 }
 
+.country-pic-container {
+  
+}
+
 .country-pic {
   width: 200px;
+  height: 200px;
+  background-position: center center;
+  object-fit: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   margin: 0 auto 10px;
 }
 
@@ -370,7 +351,7 @@ font-size: 0.8rem;
   padding: 10px;
 }
 
-.media-info > h4{
+.media-info h4{
   color: white;
   font-size: 2rem;
   margin: 0 0 5px 0;
@@ -379,6 +360,19 @@ font-size: 0.8rem;
 .media-img {
   width: 200px;
   margin: 0 auto 10px;
+}
+
+.media-img-box {
+  height: 330px;
+}
+
+.media-title-box {
+  height: 80px;
+  overflow: hidden;
+}
+
+.media-description-box {
+  height: 150px;
 }
 
 .rating {
@@ -544,6 +538,157 @@ font-size: 0.8rem;
 }
 
 
+
+.fav-btn {
+  position: relative;
+  width: 50px;
+  height: 45px;
+}
+.fav-btn:before,
+.fav-btn:after {
+  position: absolute;
+  content: "";
+  left: 25px;
+  top: 0;
+  width: 25px;
+  height: 40px;
+  background: #0c6785;
+  border-radius: 25px 25px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+.fav-btn:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+
+.fav-btn-country {
+  position: relative;
+  width: 50px;
+  height: 45px;
+  background: transparent;
+  border: none;
+}
+.fav-btn-country:before,
+.fav-btn-country:after {
+  position: absolute;
+  content: "";
+  left: 25px;
+  top: 0;
+  width: 25px;
+  height: 40px;
+  background-color: pink;
+  color: pink;
+  border-radius: 25px 25px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+.fav-btn-country:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+
+
+@media (min-width: 600px) {
+  .menu-span {
+    display: inline-block;
+  }
+  .fas {
+    display: none;
+  }
+
+  .user-info-textbox {
+    margin-left: calc(50vw - 250px);
+    width: 500px;
+    text-align: left;
+  }
+  .profile-pic {
+    width: 500px;
+  }
+
+  .edit-user-form > input {
+    width: 400px;
+  }
+}
+
+@media (min-width: 1000px) {
+  #myVideo {
+    display: flex;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+  }
+
+  .new-country-screen {
+    background-color: pink;
+    width: 500px;
+    margin: 250px auto;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .new-country-screen > h3 {
+    color: #0c6785;
+  }
+
+  .new-country-screen > form > input {
+    border-bottom: 2px solid #0c6785;
+  }
+
+  .user-info-textbox {
+    margin-left: calc(50vw - 300px);
+    width: 600px;
+    text-align: left;
+  }
+  .profile-pic {
+    width: 600px;
+  }
+
+  .edit-user-form > input {
+    width: 600px;
+  }
+
+  .start-screen {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .start-screen h1 {
+    font-size: 8rem;
+  }
+  .start-screen h2 {
+    font-size: 2rem;
+  }
+  .start-screen p {
+    font-size: 1rem;
+  }
+  .start-logo-box {
+    height: 180px
+  }
+  .start-logo {
+    width: 200px;
+  }
+  .start-right {
+    margin-top: 150px;
+    margin-right: 100px;
+  }
+  .start-right h4 {
+    font-size: 1.5rem;
+  }
+  .signup-screen {
+    display: block;
+  }
+  .signin-screen {
+    display: block;
+  }
+}
 
 
 /*# sourceMappingURL=style.css.map */ 

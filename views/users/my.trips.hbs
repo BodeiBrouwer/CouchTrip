@@ -14,13 +14,15 @@
     {{#each countriesToDo}}
     <div class="country-info">
       <h4>{{this.name}}</h4>
+      <div class="country-pic-container">
       <img class="country-pic" src="https://source.unsplash.com/random/?{{this.name}}" alt="{{this.name}}">
+      </div>
       <a href="/countries/{{this.name}}">Discover more</a>
       <a href="/countries/{{this.name}}/delete">
         <button type="submit" class="btn btn-primary">Delete from my trips</button>
       </a>
-      <a href="/countries/{{this.name}}/fave">
-        <button type="submit" class="btn btn-primary">Add to favourites</button>
+      <a class="fav-btn-country-box" href="/countries/{{this.name}}/fave">
+        <button type="submit" class="fav-btn-country"></button>
       </a>
     </div>
     {{/each}}
