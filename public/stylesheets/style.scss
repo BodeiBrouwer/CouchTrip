@@ -654,6 +654,34 @@ font-size: 0.8rem;
   .edit-user-form > input {
     width: 800px;
   }
+
+  .start-screen {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .start-screen h1 {
+    font-size: 8rem;
+  }
+  .start-screen h2 {
+    font-size: 2rem;
+  }
+  .start-screen p {
+    font-size: 1rem;
+  }
+  .start-logo-box {
+    height: 180px
+  }
+  .start-logo {
+    width: 200px;
+  }
+  .start-right {
+    margin-top: 150px;
+    margin-right: 100px;
+  }
+  .start-right h4 {
+    font-size: 1.5rem;
+  }
 }
 
 
