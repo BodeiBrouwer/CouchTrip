@@ -609,6 +609,10 @@ font-size: 0.8rem;
   .profile-pic {
     width: 500px;
   }
+
+  .edit-user-form > input {
+    width: 400px;
+  }
 }
 
 @media (min-width: 1000px) {
@@ -644,6 +648,10 @@ font-size: 0.8rem;
     text-align: left;
   }
   .profile-pic {
+    width: 800px;
+  }
+
+  .edit-user-form > input {
     width: 800px;
   }
 }
