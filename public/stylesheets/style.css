@@ -223,7 +223,13 @@ h5 {
 
 .add-country-btn {
   background-color: #0c6785;
-  padding: 5px; }
+  padding: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 250px;
+  margin: 10px auto 30px;
+  font-weight: bold; }
 
 .btn:focus {
   outline: none; }
@@ -462,6 +468,55 @@ h5 {
 
 .error-message {
   color: #0c6785; }
+
+.fav-btn {
+  position: relative;
+  width: 50px;
+  height: 45px; }
+
+.fav-btn:before,
+.fav-btn:after {
+  position: absolute;
+  content: "";
+  left: 25px;
+  top: 0;
+  width: 25px;
+  height: 40px;
+  background: #0c6785;
+  border-radius: 25px 25px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%; }
+
+.fav-btn:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%; }
+
+.fav-btn-country {
+  position: relative;
+  width: 50px;
+  height: 45px;
+  background: transparent;
+  border: none; }
+
+.fav-btn-country:before,
+.fav-btn-country:after {
+  position: absolute;
+  content: "";
+  left: 25px;
+  top: 0;
+  width: 25px;
+  height: 40px;
+  background-color: pink;
+  color: pink;
+  border-radius: 25px 25px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%; }
+
+.fav-btn-country:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%; }
 
 /*# sourceMappingURL=style.css.map */
 
