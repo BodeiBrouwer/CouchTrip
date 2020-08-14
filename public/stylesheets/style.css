@@ -566,8 +566,8 @@ h5 {
     width: 600px;
     text-align: left; }
   .profile-pic {
-    width: 600px;
-    max-height: 400px;
+    max-width: 100px;
+    max-height: 100px;
     object-fit: contain; }
   .edit-user-form > input {
     width: 600px; }
