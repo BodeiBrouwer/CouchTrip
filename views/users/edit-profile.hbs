@@ -10,17 +10,38 @@
   <label for="signup-email">Email</label>
   <input id="edit-email" name="email" type="email" value="{{loggedInUser.email}}">
 
-  <label for="favouritePlaces">Favourite CouchTrips</label>
-  <input id="edit-places" name="favouritePlaces" type="text" value="{{loggedInUser.favouritePlaces}}"">
-
-  <label for="favouriteBooks">Favourite books</label>
-  <input id="edit-books" name="favouriteBooks" type="text" value="{{loggedInUser.favouriteBooks}}">
-
-  <label for="favouriteMovies">Favourite movies</label>
-  <input id="edit-movies" name="favouriteMovies" type="text" value="{{loggedInUser.favouriteMovies}}">
-  
   <button class="btn edit-profile-btn" type="submit">Save changes</button>
 </form>
+
+  <label for="favouritePlaces">Favourite CouchTrips</label>
+  <div>
+  {{#each loggedInUser.favouritePlaces}}
+    <p> {{this}}</p>
+      <a href="/countries/{{this}}/unfave">
+         <input type="button" class="btn btn-primary" value="Remove from favourites">
+      </a>
+  {{/each}}
+  </div>
+
+  <label for="favouriteBooks">Favourite books</label>
+  <div>
+  {{#each loggedInUser.favouriteBooks}}
+    <p> {{this}}</p>
+      <a href="/books/{{this}}/unfave">
+         <input type="button" class="btn btn-primary" value="Remove from favourites">
+      </a>
+  {{/each}}
+  </div>
+
+  <label for="favouriteMovies">Favourite movies</label>
+  <div>
+  {{#each loggedInUser.favouriteMovies}}
+    <p> {{this}}</p>
+      <a href="/movies/{{this}}/unfave">
+         <input type="button" class="btn btn-primary" value="Remove from favourites">
+      </a>
+  {{/each}}
+  </div>
 
 {{#if errorMessage}}
   <div class="error">{{errorMessage}}</div>
