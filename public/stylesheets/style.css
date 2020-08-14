@@ -426,10 +426,11 @@ h5 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px; }
+  margin-top: 10px; }
 
 .pic-upload-box > h2 {
-  color: white; }
+  color: white;
+  margin: 20px 0; }
 
 .form-control-file::-webkit-file-upload-button {
   visibility: hidden; }
@@ -509,6 +510,24 @@ h5 {
   transform: rotate(45deg);
   transform-origin: 100% 100%; }
 
+.fav-box {
+  display: flex;
+  justify-content: center;
+  height: 30px; }
+
+.fav-box p {
+  color: #0c6785;
+  margin-right: 5px; }
+
+.fav-box label {
+  color: pink; }
+
+.fav-box input {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  text-align: center; }
+
 @media (min-width: 600px) {
   .menu-span {
     display: inline-block; }
@@ -547,7 +566,9 @@ h5 {
     width: 600px;
     text-align: left; }
   .profile-pic {
-    width: 600px; }
+    width: 600px;
+    max-height: 400px;
+    object-fit: contain; }
   .edit-user-form > input {
     width: 600px; }
   .start-screen {

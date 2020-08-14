@@ -11,37 +11,44 @@
   <input id="edit-email" name="email" type="email" value="{{loggedInUser.email}}">
 
   <button class="btn edit-profile-btn" type="submit">Save changes</button>
-</form>
+
 
   <label for="favouritePlaces">Favourite CouchTrips</label>
-  <div>
+  
   {{#each loggedInUser.favouritePlaces}}
-    <p> {{this}}</p>
+    <div class="fav-box">
+    <p>{{this}}</p>
       <a href="/countries/{{this}}/unfave">
-         <input type="button" class="btn btn-primary" value="Remove from favourites">
+         <input type="button" class="btn btn-primary" value="-">
       </a>
+    </div>
   {{/each}}
-  </div>
+
 
   <label for="favouriteBooks">Favourite books</label>
-  <div>
+  <div class="fav-box">
   {{#each loggedInUser.favouriteBooks}}
+    <div class="fav-box"></div>
     <p> {{this}}</p>
       <a href="/books/{{this}}/unfave">
-         <input type="button" class="btn btn-primary" value="Remove from favourites">
+         <input type="button" class="btn btn-primary" value="-">
       </a>
+    </div>
   {{/each}}
-  </div>
+  
 
   <label for="favouriteMovies">Favourite movies</label>
-  <div>
+  
   {{#each loggedInUser.favouriteMovies}}
+    <div class="fav-box">
     <p> {{this}}</p>
       <a href="/movies/{{this}}/unfave">
-         <input type="button" class="btn btn-primary" value="Remove from favourites">
+         <input type="button" class="btn btn-primary" value="-">
       </a>
+    </div>
   {{/each}}
-  </div>
+
+</form> 
 
 {{#if errorMessage}}
   <div class="error">{{errorMessage}}</div>
