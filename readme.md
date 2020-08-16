@@ -128,7 +128,7 @@ https://trello.com/b/8srhMPrV/couchtrip
 ### Git
 https://github.com/BodeiBrouwer/CouchTrip
 
-[Deploy Link]
+https://couchtrip.herokuapp.com/
 
 <br>
 
